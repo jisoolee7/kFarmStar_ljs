@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- iCheck -->
+		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+			<style>
+				.form-control{
+				border-radius: .25rem;}
+				.x_panel{
+				border-radius: .25rem;}
+				
+			</style>
+	</th:block>
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript">
+		<!-- iCheck -->
+    	<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+	</th:block>
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+	
+	</th:block>	
+	
+	<th:block layout:fragment="customContents">
+		<div class="col-md-12 col-sm-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>리퍼브 상품 목록<small>Food refurb list</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+
+                    <p>Add class <code>bulk_action</code> to table for bulk actions options on row select</p>
+					
+					<!-- START : 검색 바 -->
+					<div th:include="goods/searchGoods :: searchGoodsFragment"></div><br>
+					<!-- END : 검색 바 -->
+						
+                    <div class="table-responsive">
+                      <table class="table text-center jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">상품 번호</th>
+                            <th class="column-title">대분류</th>
+                            <th class="column-title">소분류</th>
+                            <th class="column-title">가격</th>
+                            <th class="column-title">아이디</th>
+                            <th class="column-title">등록 날짜</th>
+                            <th class="column-title">상세 조회</th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">선택된 개수 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+						<tbody>
+							<tr class="even pointer">
+								<td class="a-center "><input type="checkbox" class="flat"
+									name="table_records"></td>
+								<td class=" ">121000</td>
+								<td class=" ">사과/배/토마토</td>
+								<td class=" ">사과</td>
+								<td class=" ">20,000</td>
+								<td class=" ">id005</td>
+								<td class=" ">2022/02/01</td>
+								<td class=" ">
+									<a th:href="@{/goods/goodsDetail}"> 
+										<input type="button" value="상세 조회">
+									</a>
+								</td>
+							</tr>
+							<tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121001</td>
+                            <td class=" ">고구마/감자/당근</td>
+                            <td class=" ">감자</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121002</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121003</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+
+                          <tr class="even pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center ">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">121004</td>
+                            <td class=" ">망고/열대과일</td>
+                            <td class=" ">패션후르츠</td>
+                            <td class=" ">20,000</td>
+                            <td class=" ">id005</td>
+                            <td class=" ">2022/02/01</td>
+                       		<td class=" "><input type="button" value="상세 조회"></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      
+                      <nav aria-label="Page navigation example">
+						  <ul class="pagination justify-content-center">
+						    <li class="page-item disabled">
+						      <a class="page-link">Previous</a>
+						    </li>
+						    <li class="page-item"><a class="page-link" href="#">1</a></li>
+						    <li class="page-item"><a class="page-link" href="#">2</a></li>
+						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						    <li class="page-item">
+						      <a class="page-link" href="#">Next</a>
+						    </li>
+						  </ul>
+					</nav>
+                    </div>
+							
+						
+                  </div>
+                </div>
+              </div>
+              
+	</th:block>
+</html>

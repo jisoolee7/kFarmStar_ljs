@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+			<head th:replace="userFragments/head :: headFragment"></head>
+
+<body>
+			<!-- Page Preloder -->
+				    <div id="preloder">
+				        <div class="loader"></div>
+				    </div>
+					</th:block>
+			<!-- page content -->
+			<!-- start: Header -->
+			<div th:replace="userFragments/header :: headerFragment"></div>
+			<!-- end: Header -->
+					
+			<!-- start : header menu -->
+			<div th:replace="userFragments/headermenu :: headermenuFragment"></div>    			
+			<!-- end : header menu -->
+					<th:block layout:fragment="customContents">
+					</th:block>
+			<div th:replace="userFragments/footer :: footerFragment"></div>
+    
+    
+	<!-- 참고사항 -->
+	<!-- <div class="container-fluid mimin-wrapper"> -->
+		<!-- start:Left Menu -->
+		<!-- <div id="left-menu" th:replace="fragments/leftmenu :: leftmenuFragment"></div> -->	
+		<!-- end: Left Menu -->
+		
+	<!-- </div> -->
+	
+	 <!-- <div th:replace="fragments/aside :: asideFragment"></div> -->
+	
+	<!-- <div th:replace="fragments/footer :: footerFragment"></div> -->
+	<!-- start: Javascript -->
+	<!-- <script th:src="@{asset/js/jquery.min.js"></script>
+	<script th:src="@{asset/js/jquery.ui.min.js"></script>
+	<script th:src="@{asset/js/bootstrap.min.js"></script> -->
+	
+	<!-- Js Plugins -->
+    <script th:src="@{/asset/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/asset/js/bootstrap.min.js}"></script>
+    <script th:src="@{/asset/js/jquery.nice-select.min.js}"></script>
+    <script th:src="@{/asset/js/jquery-ui.min.js}"></script>
+    <script th:src="@{/asset/js/jquery.slicknav.js}"></script>
+    <script th:src="@{/asset/js/mixitup.min.js}"></script>
+    <script th:src="@{/asset/js/owl.carousel.min.js}"></script>
+    <script th:src="@{/asset/js/main.js}"></script>
+	</th:block>
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript"></th:block>
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript"></th:block>
+</body>
+
+</html>

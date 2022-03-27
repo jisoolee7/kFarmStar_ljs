@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+<head th:replace="fragments/head :: headFragment"></head>
+
+<body class="nav-md">
+	<div class="container body">
+		<div class="main_container">
+			<div class="col-md-3 left_col">
+				<!-- start : left menu -->
+				<div th:replace="fragments/leftmenu :: leftmenuFragment"></div>    			
+				<!-- end : left menu -->
+			</div>
+ 			<!-- start : top navigation -->
+			<div class="top_nav" th:replace="fragments/topnavi :: topnaviFragment"></div>
+			<!-- end : top navigation -->
+
+			<!-- page content -->
+			<div class="right_col" role="main">
+				<div class="">        		
+					<!-- start: Header -->
+					<nav th:replace="fragments/header :: headerFragment"></nav>
+					<!-- end: Header -->
+					<div class="clearfix"></div>
+					<div id="rightcolumn">
+						<th:block layout:fragment="customContents">
+						</th:block>
+					</div>
+				</div>
+			</div>
+			<div th:replace="fragments/footer :: footerFragment"></div>
+		</div>
+	</div>
+    
+    
+	<!-- 참고사항 -->
+	<!-- <div class="container-fluid mimin-wrapper"> -->
+		<!-- start:Left Menu -->
+		<!-- <div id="left-menu" th:replace="fragments/leftmenu :: leftmenuFragment"></div> -->	
+		<!-- end: Left Menu -->
+		
+	<!-- </div> -->
+	
+	 <!-- <div th:replace="fragments/aside :: asideFragment"></div> -->
+	
+	<!-- <div th:replace="fragments/footer :: footerFragment"></div> -->
+	<!-- start: Javascript -->
+	<!-- <script src="asset/js/jquery.min.js"></script>
+	<script src="asset/js/jquery.ui.min.js"></script>
+	<script src="asset/js/bootstrap.min.js"></script> -->
+	
+	
+		<!-- jQuery -->
+		<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+		<!-- Bootstrap -->
+		<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+		<!-- FastClick -->
+		<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+		<!-- NProgress -->
+		<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+		<!-- Custom Theme Scripts -->
+		<script th:src="@{/build/js/custom.min.js}"></script>
+	</th:block>
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript"></th:block>
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript"></th:block>
+</body>
+
+</html>

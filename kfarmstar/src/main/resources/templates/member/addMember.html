@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<head>
+	</head>
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	 
+	<th:block layout:fragment="customContents">
+	<div class="container row" style="float: none; margin:100 auto;">
+		<div class="col-md-6" style="float: none; margin:0 auto;">
+							<div class="x_panel">
+								<div class="x_title">
+									<h2>회원 등록 <small>registration of membership</small></h2>
+									<div class="clearfix"></div>
+								</div>
+								<div class="x_content">
+									<br />
+									<form class="form-horizontal form-label-left">
+
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">아이디<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="text" class="form-control" placeholder="아이디 입력">
+												<button type="button" class="btn-primary" style="float: right; padding-top: 3px;">중복체크</button>
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">비밀번호<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="password" class="form-control" placeholder="비밀번호 입력">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">비밀번호 확인<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="password" class="form-control" placeholder="비밀번호 입력">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">닉네임<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="text" class="form-control" placeholder="닉네임 입력">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">생년월일<span class="required">*</span>
+											</label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="date" class="form-control">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">주소<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="text" class="form-control" placeholder="주소 입력">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">휴대전화<span class="required">*</span></label>
+											<div class="col-md-9 col-sm-9 ">
+												<input type="number" class="form-control" placeholder="전화번호 입력">
+											</div>
+										</div>
+										<div class="form-group row add-member">
+											<label class="control-label col-md-3 col-sm-3 ">인증번호</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" class="form-control" placeholder="인증번호 입력">
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<a href="#">
+													<button type="button" class="btn btn-primary form-control">
+                            							<span>인증</span>
+													</button>
+                        						</a>
+											</div>
+										</div>
+										
+
+										<div class="ln_solid"></div>
+										<div class="form-group">
+											<div class="col-md-6 col-sm-6 offset-md-3">
+												<button type="button" class="btn btn-primary">취소</button>
+												<button type="submit" class="btn btn-success">회원등록</button>
+											</div>
+										</div>
+
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+	</th:block>
+</html>

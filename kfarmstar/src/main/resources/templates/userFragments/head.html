@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  
+	<!-- head 조각 -->
+	<head th:fragment="headFragment">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="description" content="Ogani Template">
+    	<meta name="keywords" content="Ogani, unica, creative, html">
+		<!-- Meta, title, CSS, favicons, etc. -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Google Font -->
+    	<link th:href="@{https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap}" rel="stylesheet">
+		
+		<!-- Css Styles -->
+	    <link rel="stylesheet" th:href="@{/asset/css/bootstrap.min.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/font-awesome.min.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/elegant-icons.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/nice-select.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/jquery-ui.min.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/owl.carousel.min.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/slicknav.min.css}" type="text/css">
+	    <link rel="stylesheet" th:href="@{/asset/css/style.css}" type="text/css">
+		
+		<!-- 사용자 정의 title -->
+		<th:block layout:fragment="customTitle"></th:block>
+		<!-- 사용자 정의 Css -->
+		<th:block layout:fragment="customCss">
+		
+		</th:block>
+	</head>
+
+</html>

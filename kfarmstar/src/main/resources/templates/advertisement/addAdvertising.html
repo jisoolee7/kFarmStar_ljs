@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- iCheck -->
+		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+		<!-- bootstrap-wysiwyg -->
+		<link th:href="@{/vendors/google-code-prettify/bin/prettify.min.css}" rel="stylesheet">
+		<!-- Select2 -->
+		<link th:href="@{/vendors/select2/dist/css/select2.min.css}" rel="stylesheet">
+		<!-- Switchery -->
+		<link th:href="@{/vendors/switchery/dist/switchery.min.css}" rel="stylesheet">
+		<!-- starrr -->
+		<link th:href="@{/vendors/starrr/dist/starrr.css}" rel="stylesheet">
+		<!-- bootstrap-daterangepicker -->
+		<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+		<style>
+			.form-control{
+			border-radius: .25rem;}
+			.x_panel{
+			border-radius: .25rem;}
+		</style>
+	</th:block>
+	
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript">
+		<!-- bootstrap-progressbar -->
+		<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+		<!-- iCheck -->
+		<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+		<!-- bootstrap-daterangepicker -->
+		<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+		<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+		<!-- bootstrap-wysiwyg -->
+		<script th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
+		<script th:src="@{/vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
+		<script th:src="@{/vendors/google-code-prettify/src/prettify.js}"></script>
+		<!-- jQuery Tags Input -->
+		<script th:src="@{/vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
+		<!-- Switchery -->
+		<script th:src="@{/vendors/switchery/dist/switchery.min.js}"></script>
+		<!-- Select2 -->
+		<script th:src="@{/vendors/select2/dist/js/select2.full.min.js}"></script>
+		<!-- Parsley -->
+		<script th:src="@{/vendors/parsleyjs/dist/parsley.min.js}"></script>
+		<!-- Autosize -->
+		<script th:src="@{/vendors/autosize/dist/autosize.min.js}"></script>
+		<!-- jQuery autocomplete -->
+		<script th:src="@{/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
+		<!-- starrr -->
+		<script th:src="@{/vendors/starrr/dist/starrr.js}"></script>
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+	</th:block>
+
+
+	<th:block layout:fragment="customContents">
+	
+		<div class="col-md-12 col-sm-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>
+						광고 등록 페이지<small>Advertising Form</small>
+					</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<form class="form-horizontal form-label-left pt-3">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th scope="col" style="width: 15%;">#</th>
+									<th scope="col">First</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">광고 신청 번호</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 신청 번호</label>
+											</div>
+											<div class="col-md-6 col-sm-6">
+												<input type="text" class="form-control" placeholder="Title">
+											</div>
+										</div>
+									</td>
+								</tr>
+								
+								<tr>
+									<th scope="row">광고 게시 기간</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">기간</label>
+												<span class="required">*</span>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<!-- start : 기간 검색 바 -->
+							
+												<div class="form-row">
+													<div class="col-md-5 col-sm-5 ">
+														<input class="date-picker form-control" placeholder="dd-mm-yyyy"
+															type="date" required="required" onfocus="this.type='date'"
+															onmouseover="this.type='date'" onclick="this.type='date'"
+															onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+														<script>
+															function timeFunctionLong(input) {
+																setTimeout(function() {
+																	input.type = 'text';
+																}, 60000);
+															}
+														</script>
+													</div>
+													<div class="align-self-center">
+														<i class="fa fa-minus"></i>
+													</div>
+													
+													<div class="col-md-5 col-sm-5 ">
+														<input class="date-picker form-control" placeholder="dd-mm-yyyy"
+															type="date" required="required" onfocus="this.type='date'"
+															onmouseover="this.type='date'" onclick="this.type='date'"
+															onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+														<script>
+															function timeFunctionLong(input) {
+																setTimeout(function() {
+																	input.type = 'text';
+																}, 60000);
+															}
+														</script>
+													</div>
+												</div>
+												<!-- END : 기간 검색 바 -->
+											</div>
+										</div>
+	
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">광고 정보</th>
+									<td>
+									
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 종류</label>
+												<span class="required">*</span>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<select class="form-control text-center">
+													<option selected="selected">  : : 광 고 종 류 선 택  : :  </option>
+													<option>게시판 광고</option>
+													<option>배너 광고</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 상품 주소</label>
+												<span class="required">*</span>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" class="form-control" placeholder="Goods Name">
+											</div>
+										</div>
+	
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">광고 사진</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 사진</label>
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<img th:src="@{/img/img123.jpg}" class="img-fluid"
+													alt="Responsive image">
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file">
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="ln_solid"></div>
+						<div class="form-group">
+							<div class="col-md-8 col-sm-8  offset-md-4">
+								<button type="button" class="btn btn-primary">취소</button>
+								<button type="reset" class="btn btn-primary">초기화</button>
+								<button type="submit" class="btn btn-success">등록</button>
+							</div>
+						</div>
+	
+					</form>
+				</div>
+			</div>
+		</div>
+	
+	</th:block>
+</html>

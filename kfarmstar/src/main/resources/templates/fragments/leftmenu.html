@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<!-- start:Left Menu -->
+	<div class="left_col scroll-view" th:fragment="leftmenuFragment">
+		
+		<div class="navbar nav_title" style="border: 0;">
+			<a th:href="@{/}" class="site_title"><i class="fa fa-leaf leftmenuMr"></i> <span>Food Refurb</span></a>
+		</div>
+
+		<div class="clearfix"></div>
+
+		<!-- menu profile quick info -->
+		<div class="profile clearfix">
+			<div class="profile_pic">
+				<img src="images/img.jpg" alt="..." class="img-circle profile_img">
+			</div>
+			<div class="profile_info">
+				<span>Welcome,</span>
+				<h2>John Doe</h2>
+			</div>
+		</div>
+		<!-- /menu profile quick info -->
+
+		<br />
+
+		<!-- sidebar menu -->
+		<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+			<div class="menu_section">
+				<h3>관리자 메뉴</h3>
+				<ul class="nav side-menu">
+					<li><a><i class="fa fa-user leftmenuMr"></i> 회원 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/member/addMember}">회원 등록</a></li>
+							<li><a th:href="@{/member/memberList}">회원 목록</a></li>
+							<li><a th:href="@{/member/sellerStoreInfo}">판매자 사업장 목록</a></li>
+							<li><a th:href="@{/member/sellerGrade}">회원 등급</a></li>
+							<li><a th:href="@{/member/loginList}">로그인 내역</a></li>
+							<li><a th:href="@{/member/logoutList}">로그아웃 내역</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-shopping-basket"></i> #상품 관리(이지수) <span class="fa fa-chevron-down"></span></a>
+	                  <ul class="nav child_menu">
+	                     <li><a th:href="@{/goods/goodsList}">상품 목록(관/판)</a></li>
+	                     <li><a th:href="@{/goods/addGoods}">상품 등록(관/판)</a></li>
+	                     <li><a th:href="@{/goods/goodsCateList}">상품 카테고리 목록(관)</a></li>
+	                     <li><a th:href="@{/goods/addLargeCate}">상품 대분류 등록(관)</a></li>
+	                     <li><a th:href="@{/goods/addSmallCate}">상품 소분류 등록(관)</a></li>
+	                  </ul>
+	               	</li>
+					<li><a><i class="fa fa-credit-card leftmenuMr"></i> 결제 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/payment/afterPaymentInfo}">결제 내역 관리</a></li>
+							<li><a th:href="@{/payment/afterPaymentStatistics}">결제 내역 통계</a></li>
+							<li><a href="typography.html">Typography</a></li>
+							<li><a href="icons.html">Icons</a></li>
+							<li><a href="glyphicons.html">Glyphicons</a></li>
+							<li><a href="widgets.html">Widgets</a></li>
+							<li><a href="invoice.html">Invoice</a></li>
+							<li><a href="inbox.html">Inbox</a></li>
+							<li><a href="calendar.html">Calendar</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-truck leftmenuMr"></i> 배송 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/delivery/deliveryCompanyInfo}">배송 회사 등록</a></li>
+							<li><a th:href="@{/delivery/deliveryCompanyList}">배송 회사 조회</a></li>
+							<li><a th:href="@{/delivery/deliveryInfo}">배송 등록</a></li>
+							<li><a th:href="@{/delivery/deliveryList}">운송장 조회</a></li>
+							<li><a th:href="@{/delivery/warehouseListInfo}">집하장 등록</a></li>
+							<li><a th:href="@{/delivery/warehouseList}">집하장 조회</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-money"></i> #광고 관리(이지수) <span class="fa fa-chevron-down"></span></a>
+                  		<ul class="nav child_menu">
+		                     <li><a th:href="@{/advertisement/advertisingList}">광고 목록(관)</a></li>
+		                     <li><a th:href="@{/advertisement/addAdvertising}">광고 등록(관)</a></li>
+		                     <li><a th:href="@{/advertisement/adPriceList}">광고 단가 목록(관)</a></li>
+		                     <li><a th:href="@{/advertisement/adApplyList}">광고 신청 목록(관/판)</a></li>
+		                     <li><a th:href="@{/advertisement/addAdApply}">광고 신청 등록(관/판)</a></li>
+		                     <li><a th:href="@{#}">광고 결제 목록??(관/판)</a></li>
+		                     <li><a th:href="@{#}">광고 결제 등록??(관/판)</a></li>
+		                     <li><a th:href="@{/advertisement/adRefundList}">광고 환불 목록(관/판)</a></li>
+                  		</ul>
+               		</li>
+					<li><a><i class="fa fa-heart leftmenuMr"></i> 기부 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="chartjs.html">Chart JS</a></li>
+							<li><a href="chartjs2.html">Chart JS2</a></li>
+							<li><a href="morisjs.html">Moris JS</a></li>
+							<li><a href="echarts.html">ECharts</a></li>
+							<li><a href="other_charts.html">Other Charts</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-bar-chart-o leftmenuMr"></i> 통계 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/statistics/getLargeStatistics}">상품 대분류 통계</a></li>
+							<li><a th:href="@{/statistics/getSamllStatistics}">상품 소분류 통계</a></li>
+							<li><a th:href="@{/statistics/getNomalPrice}">정상가 시세 통계</a></li>
+							<li><a th:href="@{/statistics/getVisitHistory}">방문 내역 통계</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-file-text-o leftmenuMr"></i> 판매게시물 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/salespoststatistics/getSalesPost}">판매게시물 통계 관리</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-bullhorn leftmenuMr"></i> 공지 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/noticeboard/getNoticeList}">공지게시판 관리</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-comments leftmenuMr"></i> 문의 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a th:href="@{/inquiry/categoryInfo}">카테고리 등록</a></li>
+							<li><a th:href="@{/inquiry/categoryList}">카테고리 목록 조회</a></li>
+							<li><a th:href="@{/inquiry/inquiryInfo}">문의 등록</a></li>
+							<li><a th:href="@{/inquiry/inquiryList}">문의 내역 조회</a></li>
+						</ul>
+					</li>
+					<li><a><i class="fa fa-exclamation-triangle leftmenuMr"></i> 신고 관리 <span class="fa fa-chevron-down"></span></a>
+						<ul class="nav child_menu">
+							<li><a href="tables.html">Tables</a></li>
+							<li><a href="tables_dynamic.html">Table Dynamic</a></li>
+						</ul>
+					</li>
+					
+				</ul>
+			</div>
+
+		</div>
+		<!-- sidebar menu -->
+
+		<!-- menu footer buttons -->
+			<div class="sidebar-footer hidden-small">
+				<a data-toggle="tooltip" data-placement="top" title="Settings">
+					<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="FullScreen">
+					<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="Lock">
+					<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+				</a>
+				<a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+					<span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+				</a>
+			</div>
+		<!-- menu footer buttons -->
+	</div>
+</html>

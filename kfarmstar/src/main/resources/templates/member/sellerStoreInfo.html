@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<head>
+		<!-- iCheck -->
+		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+	</head>
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		
+		<div class="col-md-12 col-sm-12" style="margin-top: 30px;">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>판매자 사업장 목록</h2>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+                  	<div style="margin-bottom: 5px;">
+                  		<label>등록일자별 조회</label>
+                  		<button type="button" class="btn btn-primary btn-xs member-block" style="margin-left: 10px;">오늘</button>
+                  		<button type="button" class="btn btn-default btn-xs member-block">1주</button>
+                  		<button type="button" class="btn btn-default btn-xs member-block">1개월</button>
+                  		<button type="button" class="btn btn-default btn-xs">3개월</button>
+                  		<input type="date" style="float: right;"> <input type="date" style="float: right;">
+                  	</div>
+                  	<div style="margin-bottom: 5px;">
+                  		<label>조건별 조회</label>
+                  		<select style="margin-left: 10px;">
+						  <option>관리번호</option>
+						  <option>아이디</option>
+						  <option>사업장이름</option>
+						  <option>주소</option>
+						  <option>연락처</option>
+						</select>
+						<input type="text" placeholder="내용을 입력하세요." style="margin-left: 10px;">
+						<button type="button" class="btn btn-primary" style="float: right;">초기화</button>
+						<button type="button" class="btn btn-primary" style="float: right;">검색</button>
+                  	</div>
+                  	<div>
+                  		<span>사업장 관리번호를 클릭하시면 사업장 상세내역을 확인하실 수 있습니다.</span>
+                  	</div>
+                    <div class="table-responsive" style="overflow: scroll;">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th>
+                              <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">사업장 관리번호</th>
+                            <th class="column-title">판매자 아이디</th>
+                            <th class="column-title">사업장 이름</th>
+                            <th class="column-title">사업장 주소</th>
+                            <th class="column-title">사업장 연락처</th>
+                            <th class="column-title">사업장 등록날짜</th>
+                            <th class="column-title ">사업장 수정</th>
+                            <th class="column-title ">사업장 삭제</th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td class="a-center">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td><a href="#">Seller_001</a></td>
+                            <td >id002</td>
+                            <td >보노보노 농장</td>
+                            <td >전주시 덕진구 덕진동</td>
+                            <td >070-1111-1111</td>
+                            <td >2022-03-22</td>
+                            <td>
+                            	<a th:href="@{/member/modifySellerStoreInfo}"><button type="button">사업장수정</button></a>
+                            </td>
+                            <td>
+                            	<a th:href="@{/member/removeSellerStoreInfo}">
+                            	<button type="button">사업장삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td><a href="#">Seller_001</a></td>
+                            <td >id052</td>
+                            <td >유리네 농장</td>
+                            <td >전주시 덕진구 평화동</td>
+                            <td >070-1111-1234</td>
+                            <td >2022-03-22</td>
+                            <td>
+                            	<a href="#"><button type="button">사업장수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#">
+                            	<button type="button">사업장삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td class="a-center">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td><a href="#">Seller_003</a></td>
+                            <td >id203</td>
+                            <td >지수네 농장</td>
+                            <td >전주시 덕진구 중화산동</td>
+                            <td >070-9999-1111</td>
+                            <td >2022-03-22</td>
+                            <td>
+                            	<a href="#"><button type="button">사업장수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#">
+                            	<button type="button">사업장삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td class="a-center">
+                              <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td><a href="#">Seller_004</a></td>
+                            <td >id032</td>
+                            <td >재훈이네 농장</td>
+                            <td >전주시 덕진구 송천동</td>
+                            <td >070-1111-2222</td>
+                            <td >2022-03-22</td>
+                            <td>
+                            	<a href="#"><button type="button">사업장수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#">
+                            	<button type="button">사업장삭제</button></a>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- Button trigger modal -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+	</th:block>
+	
+	

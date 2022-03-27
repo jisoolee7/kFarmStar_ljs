@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<head>
+		<!-- bootstrap-daterangepicker -->
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+	</head>
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+		
+		 <div class="row">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>회원 상세정보<small>Activity report</small></h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <div class="col-md-6 col-sm-6  profile_left">
+                    	<div class="profile_title" style="margin-bottom: 15px;">
+                    	<h2 align="center">회원 정보</h2>
+                    	</div>
+                      <div class="profile_img" style="margin-bottom: 15px;">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          <img class="img-responsive avatar-view" th:src="@{/build/images/picture.jpg}">
+                        </div>
+                      </div>
+						<a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Image</a>
+						
+                      <ul class="list-unstyled user_data">
+                      	<li><span>회원정보</span></li>
+                        <li><i class="fa fa-map-marker user-profile-icon"></i> 이름 홍길순</li>
+                        <li><i class="fa fa-map-marker user-profile-icon"></i> 주소 전라북도 전주시 덕진구
+                        </li>
+
+                        <li>
+                          <i class="fa fa-info user-profile-icon"></i> 닉네임 보노보노
+                        </li>
+
+                        <li class="m-top-xs">
+                          <i class="fa fa-external-link user-profile-icon"></i>
+                           		이메일 www.naver.com
+                        </li>
+                      </ul>
+                      
+                      <br />
+
+
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+
+                      <div class="profile_title">
+                        <div class="col-md-6">
+                          <h2>회원 활동 정보</h2>
+                        </div>
+                      </div>
+                      <!-- start of user-activity-graph -->
+                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <!-- end of user-activity-graph -->
+
+                    </div>
+                  </div>
+                </div>
+            </div>
+	
+							
+    <!-- morris.js -->
+    <script th:src="@{/vendors/raphael/raphael.min.js}"></script>
+    <script th:src="@{/vendors/morris.js/morris.min.js}"></script>
+    <!-- bootstrap-progressbar -->
+    <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+	</th:block>

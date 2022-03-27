@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	<head>
+		
+	</head>
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+	
+		<div class="col-md-12 col-sm-12" style="margin-top: 30px;">
+			<div class="x_panel">
+				<h2>회원 등급 기준</h2>
+                  <div class="x_title">
+                  <div class="clearfix"></div>
+                  <div class="x_content">
+                  <div class="table-responsive" style="overflow: scroll;">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">등급 종류</th>
+                            <th class="column-title">판매 횟수</th>
+                            <th class="column-title">판매 금액</th>
+                            <th class="column-title">별점 기준</th>
+                            <th class="column-title">기준 수정</th>
+                            <th class="column-title">기준 삭제</th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td>씨앗</td>
+                            <td>없음</td>
+                            <td>없음</td>
+                            <td>없음</td>
+                            <td>
+                            	<a th:href="@{/member/modifySellerGradeCriteria}"><button type="button">기준수정</button></a>
+                            </td>
+                            <td>
+                            	<a th:href="@{/member/removeSellerGradeCriteria}"><button type="button">기준삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td>새싹</td>
+                            <td>5건 이상</td>
+                            <td>20만원 이상</td>
+                            <td>별점 3.0 이상</td>
+                            	<td><a href="#"><button type="button">기준수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">기준삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td><a href="#">떡잎</a></td>
+                            <td>50건 이상</td>
+                            <td>200만원 이상</td>
+                            <td>별점 4.0 이상</td>
+                            <td>
+                            	<a href="#"><button type="button">기준수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">기준삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td><a href="#">나무</a></td>
+                            <td>200건 이상</td>
+                            <td>1000만원 이상</td>
+                            <td>별점 4.5 이상</td>
+                            	<td><a href="#"><button type="button">기준수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">기준삭제</button></a>
+                            </td>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+		</div>
+	
+		<div class="col-md-12 col-sm-12" style="margin-top: 30px;">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>회원 등급 혜택</h2>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+                  	
+                  	
+                    <div class="table-responsive" style="overflow: scroll;">
+                      <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                          <tr class="headings">
+                            <th class="column-title">등급 종류</th>
+                            <th class="column-title">광고 할인율</th>
+                            <th class="column-title">배송 단가 할인율</th>
+                            <th class="column-title ">혜택 수정</th>
+                            <th class="column-title ">혜택 삭제</th>
+                            <th class="bulk-actions" colspan="7">
+                              <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr class="even pointer">
+                            <td>씨앗</td>
+                            <td>없음</td>
+                            <td>없음</td>
+                            <td>
+                            	<a th:href="@{/member/modifySellerGradeBenefit}"><button type="button">혜택수정</button></a>
+                            </td>
+                            <td>
+                            	<a th:href="@{/member/removeSellerGradeBenefit}"><button type="button">혜택삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td>새싹</td>
+                            <td>광고 단가의 3% 할인</td>
+                            <td>배송 단가의 3% 할인</td>
+                            	<td><a href="#"><button type="button">혜택수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">혜택삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="even pointer">
+                            <td><a href="#">떡잎</a></td>
+                            <td>광고 단가의 5% 할인</td>
+                            <td>배송 단가의 5% 할인</td>
+                            <td>
+                            	<a href="#"><button type="button">혜택수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">혜택삭제</button></a>
+                            </td>
+                          </tr>
+                          <tr class="odd pointer">
+                            <td><a href="#">나무</a></td>
+                            <td>광고 단가의 10% 할인</td>
+                            <td>배송 단가의 10% 할인</td>
+                            	<td><a href="#"><button type="button">혜택수정</button></a>
+                            </td>
+                            <td>
+                            	<a href="#"><button type="button">혜택삭제</button></a>
+                            </td>
+                        </tbody>
+                      </table>
+                    </div>
+							
+						
+                  </div>
+                </div>
+              </div>
+	</th:block>
