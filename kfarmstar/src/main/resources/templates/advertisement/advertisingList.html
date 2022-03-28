@@ -11,12 +11,6 @@
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
 		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
-		<style>
-			.form-control{
-			border-radius: .25rem;}
-			.x_panel{
-			border-radius: .25rem;}
-		</style>
 	</th:block>
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
@@ -41,16 +35,16 @@
 		
 					<div class="x_content">
 
-				<p>
-					Add class
-					<code>bulk_action</code>
-					to table for bulk actions options on row select
-				</p>
+						<p>
+							Add class
+							<code>bulk_action</code>
+							to table for bulk actions options on row select
+						</p>
 				
 
 				
 				<!-- START : 검색 바 -->
-					<div th:include="advertisement/searchApplyList :: searchApplyListFragment"></div><br>
+					<div th:include="advertisement/searchAd :: searchAdvertisingListFragment"></div><br>
 				<!-- END : 검색 바 -->
 
 

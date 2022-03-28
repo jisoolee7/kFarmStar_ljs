@@ -11,3 +11,10 @@
 #slash{
 	display: none;
 }
+
+
+/*  개인 수정 */
+	.form-control{
+		border-radius: .25rem;}
+	.x_panel{
+		border-radius: .25rem;}
