@@ -64,6 +64,13 @@ public class AdController {
 	
 	
 	
+	@GetMapping("/adPaymentList")
+	public String getAdPaymentList(Model model) {
+		model.addAttribute("title", "FoodRefurb : 광고 결제 목록");
+		model.addAttribute("titleName", "광고 결제 목록");
+		
+		return "advertisement/adPaymentList";
+	}
 	
 	@GetMapping("/adPriceList")
 	public String getAdPriceList(Model model) {
@@ -72,6 +79,7 @@ public class AdController {
 		
 		return "advertisement/adPriceList";
 	}
+	
 	
 	@GetMapping("/adRefundList")
 	public String getAdRefundList(Model model) {
