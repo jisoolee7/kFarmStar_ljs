@@ -63,7 +63,7 @@
 			<div class="x_panel">
 				<div class="x_title">
 					<h2>
-						광고 등록 페이지<small>Advertising Form</small>
+						광고 결제 상세 정보<small>Ad Payment Detail</small>
 					</h2>
 					<div class="clearfix"></div>
 				</div>
@@ -78,25 +78,12 @@
 							</thead>
 							<tbody>
 								<tr>
-									<th scope="row">광고 신청 번호</th>
-									<td>
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label">광고 신청 번호</label>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<input type="text" class="form-control" placeholder="Title">
-											</div>
-										</div>
-									</td>
-								</tr>
-								
-								<tr>
 									<th scope="row">광고 게시 기간</th>
 									<td>
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">기간</label>
+												<span class="required">*</span>
 											</div>
 											<div class="col-md-6 col-sm-6 ">
 												<!-- start : 기간 검색 바 -->
@@ -140,12 +127,13 @@
 									</td>
 								</tr>
 								<tr>
-									<th scope="row">광고 정보</th>
+									<th scope="row">광고 신청 정보</th>
 									<td>
 									
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 종류</label>
+												<span class="required">*</span>
 											</div>
 											<div class="col-md-6 col-sm-6 ">
 												<select class="form-control text-center">
@@ -158,10 +146,32 @@
 										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 가격</label>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="number" class="form-control" placeholder="Goods Price" readonly="readonly">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 상품 주소</label>
+												<span class="required">*</span>
 											</div>
 											<div class="col-md-6 col-sm-6 ">
 												<input type="text" class="form-control" placeholder="Goods Name">
+											</div>
+										</div>
+										
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 내용 
+												<span class="required">*</span>
+												</label>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<textarea class="form-control" rows="3" placeholder="Goods Info"></textarea>
 											</div>
 										</div>
 	
@@ -184,14 +194,54 @@
 										</div>
 									</td>
 								</tr>
+								<tr>
+									<th scope="row">최초 주문 금액</th>
+									<td>
+									
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">광고 금액</label>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												100,000원
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">등급 할인</label>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												-10,000원
+											</div>
+										</div>
+										
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">결제 상세</th>
+									<td>
+									
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+											<!-- 결제 방식 -->
+												<label class="control-label">카드 간편결제</label>
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												90,000원
+											</div>
+										</div>
+										
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<div class="ln_solid"></div>
 						<div class="form-group">
 							<div class="col-md-8 col-sm-8  offset-md-4">
 								<button type="button" class="btn btn-primary">취소</button>
-								<button type="reset" class="btn btn-primary">초기화</button>
-								<button type="submit" class="btn btn-success">등록</button>
+								<button type="button" class="btn btn-danger">환불</button>
+								<button type="submit" class="btn btn-success">수정</button>
 							</div>
 						</div>
 	
