@@ -11,13 +11,6 @@
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
 		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
-			<style>
-				.form-control{
-				border-radius: .25rem;}
-				.x_panel{
-				border-radius: .25rem;}
-				
-			</style>
 	</th:block>
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
@@ -26,14 +19,35 @@
 	</th:block>
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
-	
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">* 경고 *</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        	정말 삭제하시겠습니까?
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary">삭제</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
 	</th:block>	
 	
 	<th:block layout:fragment="customContents">
 		<div class="col-md-12 col-sm-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>리퍼브 상품 목록<small>Food refurb list</small></h2>
+                    <h2><i class="fa fa-asterisk"> 리퍼브 상품 목록</i><small>Food refurb list</small></h2>
                     <div class="clearfix"></div>
                   </div>
 
@@ -53,16 +67,15 @@
 						<div class="float-left">
 							Total : <span></span>
 						</div>
-						<div class="float-right">
-								<button class="btn btn-sm bg-green">선택 삭제</button>
+						<div class="float-right pr-2">
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">선택 삭제</button>
 						</div>
 					</div>
 
 					<table class="table text-center jambo_table bulk_action">
 						<thead>
 							<tr class="headings">
-								<th><input type="checkbox" id="check-all" class="flat">
-								</th>
+								<th><input type="checkbox" id="check-all" class="flat"></th>
 								<th class="column-title">상품 번호</th>
 								<th class="column-title">대분류</th>
 								<th class="column-title">소분류</th>
@@ -70,9 +83,11 @@
 								<th class="column-title">아이디</th>
 								<th class="column-title">등록 날짜</th>
 								<th class="column-title">상세 조회</th>
-								<th class="bulk-actions" colspan="7"><a class="antoo"
-									style="color: #fff; font-weight: 500;">선택된 개수 ( <span
-										class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+								<th class="bulk-actions" colspan="7">
+									<a class="antoo" style="color: #fff; font-weight: 500;">
+										선택된 개수 ( <span class="action-cnt"> </span> ) 
+										<i class="fa fa-chevron-down"></i>
+									</a>
 								</th>
 							</tr>
 						</thead>
@@ -87,9 +102,10 @@
 								<td class=" ">20,000</td>
 								<td class=" ">id005</td>
 								<td class=" ">2022/02/01</td>
-								<td class=" "><a th:href="@{/goods/goodsDetail}"> <input
-										type="button" value="상세 조회">
-								</a></td>
+								<td class=" ">
+									<a th:href="@{/goods/goodsDetail}"> 
+									<input type="button" value="상세 조회"></a>
+								</td>
 							</tr>
 							<tr class="odd pointer">
 								<td class="a-center "><input type="checkbox" class="flat"
@@ -125,62 +141,6 @@
 								<td class=" "><input type="button" value="상세 조회"></td>
 							</tr>
 							<tr class="even pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-
-							<tr class="even pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="odd pointer">
 								<td class="a-center "><input type="checkbox" class="flat"
 									name="table_records"></td>
 								<td class=" ">121004</td>

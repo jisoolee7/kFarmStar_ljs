@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-	<!-- 상품 카테고리 검색 바 -->
+<!-- START : 상품 카테고리 검색 바 -->
 	<div th:fragment="searchGoodsCateFragment">
 		<form th:action="@{/goods/goodsCateList}" method="get">	
 				
 				
-			<!-- start : 기간 검색 바 -->
+			<!-- START : 기간 검색 바 -->
 							
 			<div class="form-row pb-3">
 				<div class="pl-1 pt-1">
@@ -17,7 +17,7 @@
                	</div>
 				<div class="col-md-3 col-sm-3 ">
 					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
-						type="date" required="required" onfocus="this.type='date'"
+						type="date" onfocus="this.type='date'"
 						onmouseover="this.type='date'" onclick="this.type='date'"
 						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
 					<script>
@@ -34,7 +34,7 @@
 				
 				<div class="col-md-3 col-sm-3 ">
 					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
-						type="date" required="required" onfocus="this.type='date'"
+						type="date" onfocus="this.type='date'"
 						onmouseover="this.type='date'" onclick="this.type='date'"
 						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
 					<script>
@@ -70,13 +70,12 @@
 					</div>
 				</div>
 			  </div>
-
 			<!-- END : 검색 바 -->
 		</form>
-
-	
 	</div>
-	
+<!-- END : 상품 카테고리 검색 바 -->
+
+
 	<!-- 선생님 예시
 	<div th:fragment="searchGoodsFragment">
 		<form th:action="@{/goods/goodsList}" method="get">
