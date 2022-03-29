@@ -13,8 +13,14 @@
 }
 
 
-/*  개인 수정 */
+/* panel & input 둥근 모서리 */
 	.form-control{
-		border-radius: .25rem;}
+		border-radius: .35rem;}
 	.x_panel{
-		border-radius: .25rem;}
+		border-radius: .35rem;}
+
+
+/* input 포커스 테두리 색*/
+	.form-control:focus {
+		border-color: #1ABB9C !important;
+		box-shadow: 0 0 0 0.2rem rgba(38,185,154,0.4) !important; }
