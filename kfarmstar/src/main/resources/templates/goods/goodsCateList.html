@@ -47,14 +47,16 @@
 				
 
 				<div class="table-responsive">
+				
 					<div class="clearfix">
 						<div class="float-left">
 							Total : <span></span>
 						</div>
 						<div class="float-right pr-2">
-							<button class="btn btn-danger btn-sm">선택 삭제</button>
+								<button class="btn btn-danger btn-sm">선택 삭제</button>
 						</div>
 					</div>
+					
 					<table class="table text-center jambo_table bulk_action">
 						<thead>
 							<tr class="headings">
@@ -76,15 +78,15 @@
 						</thead>
 
 						<tbody>
-							<tr class="even pointer">
+							<tr class="even pointer" th:if="${not #lists.isEmpty(goodsCateList)}" th:each="l : ${goodsCateList}">
 								<td class="a-center ">
 									<input type="checkbox" class="flat" name="table_records">
 								</td>
-								<td class=" ">121000040</td>
-								<td class=" ">1210040</td>
-								<td class=" ">대분류</td>
-								<td class=" ">소분류</td>
-								<td class=" ">22/02/01</td>
+								<td th:text="${l.goodsLargeCode}"></td>
+								<td th:text="${l.goodsSmallCode}"></td>
+								<td th:text="${l.goodsLargeName}"></td>
+								<td th:text="${l.goodsSmallName}"></td>
+								<td th:text="${l.updateTime}"></td>
 								<td class=" ">
 	                            	<a th:href="@{/goods/modifyGoodsCate}">
 	                            		<input type="button" value="수정">
@@ -95,54 +97,6 @@
 	                            		<input type="button" value="삭제">
 	                            	</a>
 	                            </td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000041</td>
-								<td class=" ">1210041</td>
-								<td class=" ">대분류</td>
-								<td class=" ">소분류</td>
-								<td class=" ">22/02/01</td>
-                       			<td class=" "><input type="button" value="수정"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000042</td>
-								<td class=" ">1210042</td>
-								<td class=" ">대분류</td>
-								<td class=" ">소분류</td>
-								<td class=" ">22/02/01</td>
-                       			<td class=" "><input type="button" value="수정"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">1210043</td>
-								<td class=" ">대분류</td>
-								<td class=" ">소분류</td>
-								<td class=" ">22/02/01</td>
-                       			<td class=" "><input type="button" value="수정"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">1210043</td>
-								<td class=" ">대분류</td>
-								<td class=" ">소분류</td>
-								<td class=" ">22/02/01</td>
-                       			<td class=" "><input type="button" value="수정"></td>
-								<td class=" "><input type="button" value="삭제"></td>
 							</tr>
 						</tbody>
 					</table>
