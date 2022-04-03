@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kfarmstar.admin.service.AdService;
 import com.kfarmstar.dto.AdPrice;
@@ -135,17 +136,27 @@ public class AdController {
 	
 	@GetMapping("/modifyAdApply")
 	public String modifyAdApply(Model model) {
+		
+		
 		model.addAttribute("title", "FoodRefurb : 광고 신청 수정");
 		model.addAttribute("titleName", "광고 신청 수정");
+	
 		
 		return "advertisement/modifyAdApply";
 	}
 	
 	
 	@GetMapping("/modifyAdPrice")
-	public String modifyAdPrice(Model model) {
+	public String modifyAdPrice(Model model
+			,@RequestParam(name="adPriceCode", required = false) String adPriceCode) {
+		
+		log.info("광고 단가 수정 화면");
+		log.info("상품 폼 쿼리스트링 adPriceCode : {}", adPriceCode);
+		AdPrice adPrice = adService.getAdPriceInfoByCode(adPriceCode);
 		model.addAttribute("title", "FoodRefurb : 광고 단가 수정");
 		model.addAttribute("titleName", "광고 단가 수정");
+		
+		model.addAttribute("adPrice", adPrice);
 		
 		return "advertisement/modifyAdPrice";
 	}

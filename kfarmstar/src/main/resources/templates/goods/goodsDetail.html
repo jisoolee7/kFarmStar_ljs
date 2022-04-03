@@ -2,248 +2,272 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-<!-- 사용자 정의 title -->
-<th:block layout:fragment="customTitle">
-	<title th:text="${title}"></title>
-</th:block>
-
-
-
-<!-- 사용자 정의 Css -->
-<th:block layout:fragment="customCss">
-	<!-- iCheck -->
-	<link th:href="@{/vendors/iCheck/skins/flat/green.css}"
-		rel="stylesheet">
-	<!-- bootstrap-wysiwyg -->
-	<link th:href="@{/vendors/google-code-prettify/bin/prettify.min.css}"
-		rel="stylesheet">
-	<!-- Select2 -->
-	<link th:href="@{/vendors/select2/dist/css/select2.min.css}"
-		rel="stylesheet">
-	<!-- Switchery -->
-	<link th:href="@{/vendors/switchery/dist/switchery.min.css}"
-		rel="stylesheet">
-	<!-- starrr -->
-	<link th:href="@{/vendors/starrr/dist/starrr.css}" rel="stylesheet">
-	<!-- bootstrap-daterangepicker -->
-	<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
 	
-</th:block>
-
-<!-- 사용자 정의 JsScript 파일-->
-<th:block layout:fragment="customJsScript">
-	<!-- bootstrap-progressbar -->
-	<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
-	<!-- iCheck -->
-	<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
-	<!-- bootstrap-daterangepicker -->
-	<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
-	<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
-	<!-- bootstrap-wysiwyg -->
-	<script th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
-	<script th:src="@{/vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
-	<script th:src="@{/vendors/google-code-prettify/src/prettify.js}"></script>
-	<!-- jQuery Tags Input -->
-	<script th:src="@{/vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
-	<!-- Switchery -->
-	<script th:src="@{/vendors/switchery/dist/switchery.min.js}"></script>
-	<!-- Select2 -->
-	<script th:src="@{/vendors/select2/dist/js/select2.full.min.js}"></script>
-	<!-- Parsley -->
-	<script th:src="@{/vendors/parsleyjs/dist/parsley.min.js}"></script>
-	<!-- Autosize -->
-	<script th:src="@{/vendors/autosize/dist/autosize.min.js}"></script>
-	<!-- jQuery autocomplete -->
-	<script th:src="@{/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
-	<!-- starrr -->
-	<script th:src="@{/vendors/starrr/dist/starrr.js}"></script>
-</th:block>
-
-<!-- 사용자 정의 Script-->
-<th:block layout:fragment="customScript">
-</th:block>
-
-
-
-
-<th:block layout:fragment="customContents">
-
-	<div class="col-md-12 col-sm-12">
-		<div class="x_panel">
-			<div class="x_title">
-				<h2>
-					리퍼브 상품 상세 정보<small>Food refurb detail info</small>
-				</h2>
-				<div class="clearfix"></div>
-			</div>
-			<div class="x_content">
-				<br />
-				<form class="form-horizontal form-label-left">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th scope="col" style="width: 10%;">#</th>
-								<th scope="col">First</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row">상품 번호</th>
-								<td>
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품 번호</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" class="form-control" placeholder="Goods Number" readonly="readonly">
-										</div>
-									</div>
-								</td>
-							</tr>
-							
-							<tr>
-								<th scope="row">상품 정보</th>
-								<td>
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품명</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="text" class="form-control"
-												placeholder="Goods Name">
-										</div>
-									</div>
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">판매 가격</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="number" class="form-control"
-												placeholder="Goods Price">
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품 수량</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="number" class="form-control"
-												placeholder="Goods Count">
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품 수확일</label>
-										</div>
-										<div class="col-md-6 col-sm-6">
-											<input type="date" class="form-control">
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품 설명 <span
-												class="required">*</span>
-											</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<textarea class="form-control" rows="3" placeholder="Goods Info"></textarea>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">대분류</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<select class="form-control">
-												<option>:: 대 분 류 선 택 ::</option>
-												<option>Option one</option>
-												<option>Option two</option>
-												<option>Option three</option>
-												<option>Option four</option>
-											</select>
-										</div>
-									</div>
-
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">소분류</label>
-										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<select class="form-control">
-												<option>:: 소 분 류 선 택 ::</option>
-												<option>Option one</option>
-												<option>Option two</option>
-												<option>Option three</option>
-												<option>Option four</option>
-											</select>
-										</div>
-									</div>
-									
-									<div class="form-group row">
-										<div class="col-md-2 col-sm-2">
-											<label class="control-label">유기농 여부</label>
-										</div>
-										<div class="col-md-6 col-sm-6 align-self-center">
-											<div class="form-check form-check-inline ">
-												<input class="form-check-input" type="radio"
-													name="inlineRadioOptions" id="inlineRadio1" value="option1">
-												<label class="form-check-label" for="inlineRadio1">유기농
-													O</label>
+	
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+		<!-- iCheck -->
+		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+		<!-- bootstrap-wysiwyg -->
+		<link th:href="@{/vendors/google-code-prettify/bin/prettify.min.css}" rel="stylesheet">
+		<!-- Select2 -->
+		<link th:href="@{/vendors/select2/dist/css/select2.min.css}" rel="stylesheet">
+		<!-- Switchery -->
+		<link th:href="@{/vendors/switchery/dist/switchery.min.css}" rel="stylesheet">
+		<!-- starrr -->
+		<link th:href="@{/vendors/starrr/dist/starrr.css}" rel="stylesheet">
+		<!-- bootstrap-daterangepicker -->
+		<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+		
+	</th:block>
+	
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript">
+		<!-- bootstrap-progressbar -->
+		<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+		<!-- iCheck -->
+		<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+		<!-- bootstrap-daterangepicker -->
+		<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+		<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+		<!-- bootstrap-wysiwyg -->
+		<script th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
+		<script th:src="@{/vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
+		<script th:src="@{/vendors/google-code-prettify/src/prettify.js}"></script>
+		<!-- jQuery Tags Input -->
+		<script th:src="@{/vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
+		<!-- Switchery -->
+		<script th:src="@{/vendors/switchery/dist/switchery.min.js}"></script>
+		<!-- Select2 -->
+		<script th:src="@{/vendors/select2/dist/js/select2.full.min.js}"></script>
+		<!-- Parsley -->
+		<script th:src="@{/vendors/parsleyjs/dist/parsley.min.js}"></script>
+		<!-- Autosize -->
+		<script th:src="@{/vendors/autosize/dist/autosize.min.js}"></script>
+		<!-- jQuery autocomplete -->
+		<script th:src="@{/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
+		<!-- starrr -->
+		<script th:src="@{/vendors/starrr/dist/starrr.js}"></script>
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+	</th:block>
+	
+	
+	
+	
+	<th:block layout:fragment="customContents">
+	
+		<div class="col-md-12 col-sm-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>
+						리퍼브 상품 상세 정보<small>Food refurb detail info</small>
+					</h2>
+					<div class="clearfix"></div>
+				</div>
+				<div class="x_content">
+					<br />
+					<form class="form-horizontal form-label-left">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th scope="col" style="width: 15%;">#</th>
+									<th scope="col">리퍼브 상품 정보 관리</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">상품 번호</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbCode">상품 번호</label>
 											</div>
-											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio"
-													name="inlineRadioOptions" id="inlineRadio2" value="option2"
-													checked="checked"> <label class="form-check-label"
-													for="inlineRadio2">유기농 X</label>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" readonly="readonly"
+												 name="goodsRefurbCode" th:value="${goods.goodsRefurbCode}">
 											</div>
 										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">상품 사진</th>
-								<td>
+									</td>
+								</tr>
 								
-									<div class="form-group row">
-									<div class="col-md-2 col-sm-2">
-											<label class="control-label">상품 사진</label>
+								<tr>
+									<th scope="row">상품 정보</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbName">상품명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" readonly="readonly"
+												 name="goodsRefurbName" th:value="${goods.goodsRefurbName}">
+											</div>
 										</div>
-										<div class="col-md-3 col-sm-3">
-											<img th:src="@{/img/exOrange.jpg}" class="img-fluid"
-												alt="Responsive image">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbPrice">판매 가격</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" readonly="readonly"
+												 name="goodsRefurbPrice" th:value="${goods.goodsRefurbPrice}">
+											</div>
 										</div>
-										<div class="col-md-6 col-sm-6 ">
-											<input type="file">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsNomalPrice">일반 가격</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" readonly="readonly"
+												 name="goodsNomalPrice" th:value="${goods.goodsNomalPrice}">
+											</div>
 										</div>
-									</div>
-
-								</td>
-							</tr>
-							<tr>
-								<th scope="row">3</th>
-								<td>Larry the Bird</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="ln_solid"></div>
-					<div class="form-group">
-						<div class="col-md-8 col-sm-8  offset-md-4">
-							<button type="button" class="btn btn-primary">취소</button>
-							<button type="button" class="btn btn-danger">삭제</button>
-							<button type="submit" class="btn btn-success">수정</button>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbCount">상품 수량</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" readonly="readonly"
+												 name="goodsRefurbCount" th:value="${goods.goodsRefurbCount}">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbHarvestDate">상품 수확일</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="date" class="form-control" readonly="readonly"
+												 name="goodsRefurbHarvestDate" th:value="${goods.goodsRefurbHarvestDate}">
+											</div>
+										</div>
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsPostExplain">상품 설명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<textarea class="form-control" rows="3" readonly="readonly"
+												 name="goodsPostExplain">[[${goods.goodsPostExplain}]]</textarea>
+											</div>
+										</div>
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">대분류 명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control">
+													<option>:: 대 분 류 선 택 ::</option>
+													<option>Option one</option>
+													<option>Option two</option>
+													<option>Option three</option>
+													<option>Option four</option>
+												</select>
+											</div>
+										</div>
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">소분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control">
+													<option>:: 소 분 류 선 택 ::</option>
+													<option>Option one</option>
+													<option>Option two</option>
+													<option>Option three</option>
+													<option>Option four</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">유기농 여부</label>
+											</div>
+											<div class="col-md-10 col-sm-10 align-self-center">
+												<div class="radio form-check form-check-inline">
+													<label class="form-check-label" for="organic">
+													<th:block th:if="${not #lists.isEmpty(goods)}" th:each="g : ${goods}">
+														<input type="radio" class="flat" name="refurbOrganic" id="organic" value="1"
+															th:checked="${(g.goodsRefurbOrganic == '1')}" disabled="disabled"> 유기농 O
+													</th:block>
+													</label>
+												</div>
+												<div class="radio form-check form-check-inline">
+													<label class="form-check-label" for="nonOrganic"> 
+													<th:block th:if="${not #lists.isEmpty(goods)}" th:each="g : ${goods}">
+														<input type="radio" class="flat" name="refurbOrganic" id="nonOrganic" value="0"
+														 th:checked="${(g.goodsRefurbOrganic == '0')}" disabled="disabled"> 유기농 X
+													</th:block>
+													</label>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">상품 사진</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">상품 사진</label>
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<img th:src="@{/img/exOrange.jpg}" class="img-fluid" alt="Responsive image">
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file">
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">판매자 정보</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">판매자 이름</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">사업장 번호</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control">
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="ln_solid"></div>
+						<div class="form-group">
+							<div class="col-md-8 col-sm-8  offset-md-4">
+								<button type="button" class="btn btn-primary">취소</button>
+								<button type="button" class="btn btn-danger">삭제</button>
+								<button type="submit" class="btn btn-success">수정</button>
+							</div>
 						</div>
-					</div>
-
-				</form>
+	
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-
-
-
-</th:block>
+	
+	
+	
+	</th:block>
 </html>

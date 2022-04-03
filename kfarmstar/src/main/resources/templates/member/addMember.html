@@ -2,96 +2,215 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layout/default}">
-	<head>
-	</head>
+	
 	<!-- 사용자 정의 title -->
 	<th:block layout:fragment="customTitle">
 		<title th:text="${title}"></title>
 	</th:block>
+
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+	<style>
+		.form-group{margin-top: 30px;}
+	</style>
+	</th:block>
+	
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript">
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null){
+						return false;
+					}
+					return true;
+				}
+				
+				$('#idCheck').click(function(){
+					var memberId = $('input[name="memberId"]').val();
+					//console.log(validationCheck(memberId));
+					var vCheck = validationCheck(memberId);
+					if(vCheck){
+						$.ajax({
+							 url: '/member/idCheck'
+							,type: 'POST'
+							,data: {'memberId' : memberId}
+							,dataType: 'json'
+							,success: function(data){
+								console.log(data);
+								// 화면에서 맨처음 아이디를 제외한 모든 입력하는 요소는 비활성화 (HTML 속성 추가 disabled="disabled") 
+								// 아이디 중복이 발생 않은 경우(회원가입 O) 입력하는 요소는 활성화
+								if(data){
+									$('#idCheckResult').text('사용 가능한 아이디 입니다.');
+									$('#addMemberForm input').prop('disabled', false);
+									$('#addMemberForm select').prop('disabled', false);
+									$('#addMemberForm button').prop('disabled', false);
+								}else{									
+									// 아이디 중복이 발생하는 경우(회원가입 X) 입력하는 요소는 비활성화
+									$('#idCheckResult').text('중복된 아이디가 있습니다.');
+									$('#idCheckResult').attr('color','red');
+									$('#addMemberForm input').not('input[name="memberId"]').prop('disabled', true);
+									$('#addMemberForm button').not('#idCheck').prop('disabled', true);
+									$('#addMemberForm select').prop('disabled', true);
+								}
+							}
+						});
+					}
+					
+				});
+				
+				$('#addMemberBtn').click(function(){
+					var isSubmit = true;
+					var inputObj = $('#addMemberForm').find('input');
+					
+					$.each(inputObj, function(){
+						var inputData = $(this).val();
+						var result = validationCheck(inputData);
+						
+						// 사용자가 입력하지 않은 경우
+						if(!result){
+							alert('필수 항목입니다. 입력해주세요');
+							$(this).focus();
+							isSubmit = false;
+							return false;
+						}
+					});
+					
+					console.log('유효여부 폼전송할건지?' + isSubmit )
+					
+					if(isSubmit) $('#addMemberForm').submit();
+				});
+			});
+		</script>
+	</th:block>
 	 
 	<th:block layout:fragment="customContents">
-	<div class="container row" style="float: none; margin:100 auto;">
-		<div class="col-md-6" style="float: none; margin:0 auto;">
-							<div class="x_panel">
-								<div class="x_title">
-									<h2>회원 등록 <small>registration of membership</small></h2>
-									<div class="clearfix"></div>
+		<div class="container row" style="float: none; margin:100 auto;">
+			<div class="col-md-6" style="float: none; margin:0 auto;">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>관리자 등록 <small>administrator registration</small></h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">
+						<form class="form-horizontal form-label-left" id="addMemberForm" th:action="@{/member/addMember}" method="post">
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">아이디
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6">
+									<input type="text" class="form-control" name="memberId" placeholder="아이디 입력">
 								</div>
-								<div class="x_content">
-									<br />
-									<form class="form-horizontal form-label-left">
-
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">아이디<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="text" class="form-control" placeholder="아이디 입력">
-												<button type="button" class="btn-primary" style="float: right; padding-top: 3px;">중복체크</button>
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">비밀번호<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="password" class="form-control" placeholder="비밀번호 입력">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">비밀번호 확인<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="password" class="form-control" placeholder="비밀번호 입력">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">닉네임<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="text" class="form-control" placeholder="닉네임 입력">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">생년월일<span class="required">*</span>
-											</label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="date" class="form-control">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">주소<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="text" class="form-control" placeholder="주소 입력">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">휴대전화<span class="required">*</span></label>
-											<div class="col-md-9 col-sm-9 ">
-												<input type="number" class="form-control" placeholder="전화번호 입력">
-											</div>
-										</div>
-										<div class="form-group row add-member">
-											<label class="control-label col-md-3 col-sm-3 ">인증번호</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="number" class="form-control" placeholder="인증번호 입력">
-											</div>
-											<div class="col-md-3 col-sm-3">
-												<a href="#">
-													<button type="button" class="btn btn-primary form-control">
-                            							<span>인증</span>
-													</button>
-                        						</a>
-											</div>
-										</div>
-										
-
-										<div class="ln_solid"></div>
-										<div class="form-group">
-											<div class="col-md-6 col-sm-6 offset-md-3">
-												<button type="button" class="btn btn-primary">취소</button>
-												<button type="submit" class="btn btn-success">회원등록</button>
-											</div>
-										</div>
-
-									</form>
+								<div class="col-md-3 col-sm-3">
+									<button type="button" class="btn-primary form-control" id="idCheck">중복체크</button>
+								</div>
+								<div class="offset-md-3">
+									<span id="idCheckResult"></span>
 								</div>
 							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">비밀번호
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="password" class="form-control" name="memberPw" placeholder="비밀번호 입력">
+								</div>
+							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">이름
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="text" class="form-control" name="memberName" placeholder="이름 입력">
+								</div>
+							</div>
+							<!-- <div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">비밀번호 확인
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="password" class="form-control" name="memberPw" placeholder="비밀번호 입력">
+								</div>
+							</div> -->
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">닉네임
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="text" class="form-control" name="memberNickname" placeholder="닉네임 입력">
+								</div>
+							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3">생년월일
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="date" class="form-control" name="memberBirth">
+								</div>
+							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3 ">주소
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9 ">
+									<input type="text" class="form-control" placeholder="주소 입력" name="memberAddr">
+								</div>
+							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3 ">휴대전화
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-9 col-sm-9">
+									<input type="text" class="form-control" name="memberPhone" placeholder="휴대폰번호 입력">
+								</div>
+							</div>
+							<div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3 ">이메일
+									<span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" class="form-control" name="memberEmail" placeholder="이메일 입력">
+								</div>
+								<div class="col-md-3 col-sm-3">
+									<a href="#">
+										<button type="button" class="btn btn-primary form-control sendMail">
+										<span>인증</span>
+										</button>
+									</a>
+								</div>
+							</div>
+							<!-- <div class="form-group row add-member">
+								<label class="control-label col-md-3 col-sm-3 ">인증번호</label>
+								<div class="col-md-6 col-sm-6 ">
+									<input type="text" class="form-control" placeholder="인증번호 입력">
+								</div>
+								<div class="col-md-3 col-sm-3">
+									<a href="#">
+										<button type="button" class="btn btn-primary form-control">
+										<span>인증</span>
+										</button>
+									</a>
+								</div>
+							</div> -->
+								
+						
+						<div class="ln_solid"></div>
+						<div class="form-group">
+							<div class="col-md-8 col-sm-8  offset-md-4">
+								<button type="button" class="btn btn-primary">취소</button>
+								<button type="button" id="addMemberBtn" class="btn btn-success">등록</button>
+							</div>
 						</div>
+						
+						</form>
 					</div>
+				</div>
+			</div>
+		</div>
 	</th:block>
 </html>
