@@ -1,23 +1,21 @@
 package com.kfarmstar.dto;
 
-public class AdPrice {
-	
-	private String adPriceCode;
+public class GoodsLarge {
+	private String goodsLargeCate;
 	private String memberId;
-	private String adCate;
-	private String adPricePerDay;
-	private String entryTime;
 	private String updateManagerId;
+	private String goodsLargeName;
+	private String entryTime;
 	private String lastUpdateTime;
 	
 	private Member member;
 
-	public String getAdPriceCode() {
-		return adPriceCode;
+	public String getGoodsLargeCate() {
+		return goodsLargeCate;
 	}
 
-	public void setAdPriceCode(String adPriceCode) {
-		this.adPriceCode = adPriceCode;
+	public void setGoodsLargeCate(String goodsLargeCate) {
+		this.goodsLargeCate = goodsLargeCate;
 	}
 
 	public String getMemberId() {
@@ -28,20 +26,20 @@ public class AdPrice {
 		this.memberId = memberId;
 	}
 
-	public String getAdCate() {
-		return adCate;
+	public String getUpdateManagerId() {
+		return updateManagerId;
 	}
 
-	public void setAdCate(String adCate) {
-		this.adCate = adCate;
+	public void setUpdateManagerId(String updateManagerId) {
+		this.updateManagerId = updateManagerId;
 	}
 
-	public String getAdPricePerDay() {
-		return adPricePerDay;
+	public String getGoodsLargeName() {
+		return goodsLargeName;
 	}
 
-	public void setAdPricePerDay(String adPricePerDay) {
-		this.adPricePerDay = adPricePerDay;
+	public void setGoodsLargeName(String goodsLargeName) {
+		this.goodsLargeName = goodsLargeName;
 	}
 
 	public String getEntryTime() {
@@ -50,14 +48,6 @@ public class AdPrice {
 
 	public void setEntryTime(String entryTime) {
 		this.entryTime = entryTime;
-	}
-
-	public String getUpdateManagerId() {
-		return updateManagerId;
-	}
-
-	public void setUpdateManagerId(String updateManagerId) {
-		this.updateManagerId = updateManagerId;
 	}
 
 	public String getLastUpdateTime() {
@@ -79,18 +69,16 @@ public class AdPrice {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AdPrice [adPriceCode=");
-		builder.append(adPriceCode);
+		builder.append("GoodsLarge [goodsLargeCate=");
+		builder.append(goodsLargeCate);
 		builder.append(", memberId=");
 		builder.append(memberId);
-		builder.append(", adCate=");
-		builder.append(adCate);
-		builder.append(", adPricePerDay=");
-		builder.append(adPricePerDay);
-		builder.append(", entryTime=");
-		builder.append(entryTime);
 		builder.append(", updateManagerId=");
 		builder.append(updateManagerId);
+		builder.append(", goodsLargeName=");
+		builder.append(goodsLargeName);
+		builder.append(", entryTime=");
+		builder.append(entryTime);
 		builder.append(", lastUpdateTime=");
 		builder.append(lastUpdateTime);
 		builder.append(", member=");
@@ -98,5 +86,6 @@ public class AdPrice {
 		builder.append("]");
 		return builder.toString();
 	}
+
 	
 }

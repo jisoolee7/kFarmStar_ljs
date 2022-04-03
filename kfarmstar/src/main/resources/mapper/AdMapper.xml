@@ -5,21 +5,46 @@
 
 <mapper namespace="com.kfarmstar.admin.mapper.AdMapper">
 
-	<select id="getAdPriceList" resultType="AdPrice">
+	<resultMap type="AdPrice" id="adPriceResultMap">
+		<result column="ad_price_code" 		property="adPriceCode"/>
+		<result column="member_id" 			property="memberId"/>
+		<result column="ad_cate" 			property="adCate"/>
+		<result column="ad_price_per_day"	property="adPricePerDay"/>
+		<result column="entry_time" 		property="entryTime"/>
+		<result column="update_manager_id" 	property="updateManagerId"/>
+		<result column="last_update_time" 	property="lastUpdateTime"/>
+		<association property="member" 	javaType="Member">
+			<id 	column="m_id" 		property="memberId"/>
+			<result column="m_name" 	property="memberName"/>
+			<result column="m_level" 	property="memberLevel"/>
+			<result column="m_pw" 		property="memberPw"/>
+		</association>
+	</resultMap>
+
+	<select id="getAdPriceList" resultType="AdPrice"  resultMap="adPriceResultMap">
 		/* 광고 단가 목록 조회 */
 		
 		SELECT 
-			a.ad_price_code			AS adPriceCode
-			,a.ad_cate				AS adCate
-			,a.ad_price_per_day		AS adPricePerDay
-			,a.member_id			AS memberId
-			,a.entry_time			AS regDate
+			a.ad_price_code		
+			,a.ad_cate				
+			,a.ad_price_per_day		
+			,a.member_id			
+			,a.entry_time		
 		FROM 
 			ad_price AS a
 
 		ORDER BY a.ad_price_code;
-		
 	</select>
-
+	<select id="getAdPriceInfoByCode" resultType="AdPrice"  resultMap="adPriceResultMap">
+		/* 광고 코드별 상세 정보 조회 */
+		SELECT 
+			a.ad_price_code		
+			,a.ad_cate				
+			,a.ad_price_per_day		
+			,a.member_id			
+		FROM 
+			ad_price AS a
+		WHERE a.ad_price_code=#{adPriceCode};
+	</select>
 
 </mapper>

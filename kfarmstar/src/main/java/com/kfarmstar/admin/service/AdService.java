@@ -20,10 +20,21 @@ public class AdService {
 		this.adMapper = adMapper;
 	}
 	
+	/**
+	 * 광고 단가 목록 조회
+	 */
 	public List<AdPrice> getAdPriceList() {
 		
 		List<AdPrice> adPriceList = adMapper.getAdPriceList();
 		return adPriceList;
+	}
+	
+
+	/**
+	 * 광고단가 코드별 정보 조회
+	 */
+	public AdPrice getAdPriceInfoByCode(String adPriceCode) {
+		return adMapper.getAdPriceInfoByCode(adPriceCode);
 	}
 	
 }
