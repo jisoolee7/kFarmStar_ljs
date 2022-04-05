@@ -17,7 +17,34 @@
 	
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
+		<script type="text/javascript" th:inline="javascript">
+			$(function(){
+				
+				$('#addSmallCateBtn').click(function(){
+					var isSubmit = true;
+					var goodsLargeCate = $('#goodsLargeCate').val();
+					var goodsSmallName = $('#goodsSmallName').val();
+					
+					if(goodsLargeCate == ''){
+						alert('필수 항목입니다. 입력해주세요');
+						$('#goodsLargeCate').focus();
+						isSubmit = false;
+						return false;
+					}
+					
+					if(goodsSmallName == ''){
+						alert('필수 항목입니다. 입력해주세요');
+						$('#goodsSmallName').focus();
+						isSubmit = false;
+						return false;
+					}
+						
+					if(isSubmit) $('#addSmallCateForm').submit();
+				});
+			});
+		</script>
 	</th:block>
+
 
 	<th:block layout:fragment="customContents">
 	
@@ -31,41 +58,45 @@
 				</div>
 				<div class="x_content">
 					<br />
-					<form class="form-horizontal form-label-left">
+					<form id="addSmallCateForm" class="form-horizontal form-label-left" th:action="@{/goods/addSmallCate}" method="post">
 	
 						<div class="form-group row ">
-							<label class="control-label col-md-3 col-sm-3 ">등록자 아이디</label>
+							<label class="control-label col-md-3 col-sm-3 " for="memberId">등록자 아이디</label>
 							<div class="col-md-9 col-sm-9 ">
-								<input type="text" class="form-control" readonly="readonly" placeholder="id007">
+							<!-- 임의로 넣은 밸류값 후에 세션 아이디 받아오기 -->
+								<input type="text" class="form-control" readonly="readonly"
+									id="memberId" name="memberId" value="id002">
 							</div>
 						</div>
 						
 						<div class="form-group row">
-							<label class="control-label col-md-3 col-sm-3 ">대분류</label>
+							<label class="control-label col-md-3 col-sm-3 ">대분류 명</label>
 							<div class="col-md-9 col-sm-9 ">
-								<select class="form-control">
-									<option> ::  대 분 류   선 택   ::</option>
-									<option>Option one</option>
-									<option>Option two</option>
-									<option>Option three</option>
-									<option>Option four</option>
+								<select class="form-control" name="goodsLargeCate" id="goodsLargeCate">
+									<option value="" selected="selected"> ::  대 분 류   선 택   ::</option>
+									<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
+										<option th:value="${l.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
+									</th:block>
 								</select>
 							</div>
 						</div>
 						
 						<div class="form-group row ">
-							<label class="control-label col-md-3 col-sm-3 ">소분류 명</label>
+							<label class="control-label col-md-3 col-sm-3" for="goodsSmallName">소분류 명</label>
 							<div class="col-md-9 col-sm-9 ">
-								<input type="text" class="form-control" placeholder="Small Category Name">
+								<input type="text" class="form-control" placeholder="Small Category Name" 
+								id="goodsSmallName" name="goodsSmallName">
 							</div>
 						</div>
 	
 						<div class="ln_solid"></div>
 						<div class="form-group">
 							<div class="col-md-8 col-sm-8  offset-md-4">
-								<button type="button" class="btn btn-primary">Cancel</button>
-								<button type="reset" class="btn btn-primary">Reset</button>
-								<button type="submit" class="btn btn-success">Submit</button>
+								<a th:href="@{/goods/goodsCateList}">
+									<button type="button" class="btn btn-primary">취소</button>
+								</a>
+								<button type="reset" class="btn btn-info">초기화</button>
+								<button type="button" class="btn btn-success" id="addSmallCateBtn">등록</button>
 							</div>
 						</div>
 	

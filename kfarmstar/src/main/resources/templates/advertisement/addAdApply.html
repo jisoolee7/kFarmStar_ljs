@@ -59,7 +59,7 @@
 
 	<th:block layout:fragment="customContents">
 	
-		<div class="col-md-12 col-sm-12">
+		<div class="col-md-8 col-sm-8 offset-md-2">
 			<div class="x_panel">
 				<div class="x_title">
 					<h2>
@@ -84,7 +84,7 @@
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">게시글 제목</label>
 											</div>
-											<div class="col-md-6 col-sm-6">
+											<div class="col-md-8 col-sm-8">
 												<input type="text" class="form-control" placeholder="Title">
 											</div>
 										</div>
@@ -99,7 +99,7 @@
 												<label class="control-label">기간</label>
 												<span class="required">*</span>
 											</div>
-											<div class="col-md-6 col-sm-6 ">
+											<div class="col-md-8 col-sm-8 ">
 												<!-- start : 기간 검색 바 -->
 							
 												<div class="form-row">
@@ -149,7 +149,7 @@
 												<label class="control-label">광고 종류</label>
 												<span class="required">*</span>
 											</div>
-											<div class="col-md-6 col-sm-6 ">
+											<div class="col-md-8 col-sm-8">
 												<select class="form-control text-center">
 													<option selected="selected">  : : 광 고 종 류 선 택  : :  </option>
 													<option>게시판 광고</option>
@@ -162,8 +162,8 @@
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 가격</label>
 											</div>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="number" class="form-control" placeholder="Goods Price" readonly="readonly">
+											<div class="col-md-8 col-sm-8">
+												<input type="number" class="form-control" placeholder="Ad Price" readonly="readonly">
 											</div>
 										</div>
 										
@@ -172,8 +172,8 @@
 												<label class="control-label">광고 상품 주소</label>
 												<span class="required">*</span>
 											</div>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="text" class="form-control" placeholder="Goods Name">
+											<div class="col-md-8 col-sm-8">
+												<input type="text" class="form-control" placeholder="Ad Url">
 											</div>
 										</div>
 										
@@ -184,8 +184,8 @@
 												<span class="required">*</span>
 												</label>
 											</div>
-											<div class="col-md-6 col-sm-6 ">
-												<textarea class="form-control" rows="3" placeholder="Goods Info"></textarea>
+											<div class="col-md-8 col-sm-8">
+												<textarea class="form-control" rows="3" placeholder="Ad Content"></textarea>
 											</div>
 										</div>
 	
@@ -199,10 +199,9 @@
 												<label class="control-label">광고 사진</label>
 											</div>
 											<div class="col-md-3 col-sm-3">
-												<img th:src="@{/img/exOrange.jpg}" class="img-fluid"
-													alt="Responsive image">
+												<img th:src="@{/img/exOrange.jpg}" class="img-fluid" alt="Responsive image">
 											</div>
-											<div class="col-md-6 col-sm-6 ">
+											<div class="col-md-5 col-sm-5 ">
 												<input type="file">
 											</div>
 										</div>
@@ -214,7 +213,7 @@
 						<div class="form-group">
 							<div class="col-md-8 col-sm-8  offset-md-4">
 								<button type="button" class="btn btn-primary">취소</button>
-								<button type="reset" class="btn btn-primary">초기화</button>
+								<button type="reset" class="btn btn-info">초기화</button>
 								<button type="submit" class="btn btn-success">등록</button>
 							</div>
 						</div>

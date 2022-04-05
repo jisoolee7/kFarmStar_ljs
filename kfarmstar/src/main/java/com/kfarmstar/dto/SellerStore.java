@@ -7,7 +7,9 @@ public class SellerStore {
 	private String sellerLicenseNum;
 	private String sellerStorePhone;
 	private String sellerEntryDate;
+	private String sellerStorePostNum;
 	private String sellerStoreAddr;
+	private String sellerStoreDetailAddr;
 	private String sellerTaxType;
 	
 	private Member member;
@@ -60,12 +62,28 @@ public class SellerStore {
 		this.sellerEntryDate = sellerEntryDate;
 	}
 
+	public String getSellerStorePostNum() {
+		return sellerStorePostNum;
+	}
+
+	public void setSellerStorePostNum(String sellerStorePostNum) {
+		this.sellerStorePostNum = sellerStorePostNum;
+	}
+
 	public String getSellerStoreAddr() {
 		return sellerStoreAddr;
 	}
 
 	public void setSellerStoreAddr(String sellerStoreAddr) {
 		this.sellerStoreAddr = sellerStoreAddr;
+	}
+
+	public String getSellerStoreDetailAddr() {
+		return sellerStoreDetailAddr;
+	}
+
+	public void setSellerStoreDetailAddr(String sellerStoreDetailAddr) {
+		this.sellerStoreDetailAddr = sellerStoreDetailAddr;
 	}
 
 	public String getSellerTaxType() {
@@ -75,9 +93,6 @@ public class SellerStore {
 	public void setSellerTaxType(String sellerTaxType) {
 		this.sellerTaxType = sellerTaxType;
 	}
-	
-	
-	
 
 	public Member getMember() {
 		return member;
@@ -90,7 +105,7 @@ public class SellerStore {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("sellerStore [sellerStoreNum=");
+		builder.append("SellerStore [sellerStoreNum=");
 		builder.append(sellerStoreNum);
 		builder.append(", memberId=");
 		builder.append(memberId);
@@ -102,8 +117,12 @@ public class SellerStore {
 		builder.append(sellerStorePhone);
 		builder.append(", sellerEntryDate=");
 		builder.append(sellerEntryDate);
+		builder.append(", sellerStorePostNum=");
+		builder.append(sellerStorePostNum);
 		builder.append(", sellerStoreAddr=");
 		builder.append(sellerStoreAddr);
+		builder.append(", sellerStoreDetailAddr=");
+		builder.append(sellerStoreDetailAddr);
 		builder.append(", sellerTaxType=");
 		builder.append(sellerTaxType);
 		builder.append(", member=");
@@ -111,5 +130,5 @@ public class SellerStore {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

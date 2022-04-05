@@ -69,71 +69,25 @@
 						</thead>
 
 						<tbody>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000040</td>
-								<td class=" ">게시글 제목 입니다.</td>
-								<td class=" ">id008</td>
-								<td class=" ">신청중</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">
-									<a th:href="@{/advertisement/adApplyDetail}"> 
-										<input type="button" value="상세 조회">
-									</a>
-								</td>
-
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000041</td>
-								<td class=" ">게시글 제목 입니다.</td>
-								<td class=" ">id020</td>
-								<td class=" ">결제전</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000042</td>
-								<td class=" ">게시글 제목 입니다.</td>
-								<td class=" ">id032</td>
-								<td class=" ">결제완료</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">게시글 제목 입니다.</td>
-								<td class=" ">id032</td>
-								<td class=" ">승인불가</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">게시글 제목 입니다.</td>
-								<td class=" ">id055</td>
-								<td class=" ">광고중</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
+							<th:block th:if="${not #lists.isEmpty(adApplyList)}" th:each="l : ${adApplyList}">
+								<tr class="even pointer">
+									<td class="a-center ">
+										<input type="checkbox" class="flat" name="table_records">
+									</td>
+									<td class=" " th:text="${l.adApplyCode}"></td>
+									<td class=" " th:text="${l.adApplyTitle}"></td>
+									<td class=" " th:text="${l.memberId}"></td>
+									<td class=" " th:text="${l.adPermitState}"></td>
+									<td class=" " th:text="${l.adApplyDate}"></td>
+									<td class=" ">						
+										<a th:href="@{/advertisement/adApplyDetail(adApplyCode=${l.adApplyCode})}"> 	<!-- (adApplyCode=${l.adApplyCode}) -->
+											<input type="button" value="상세 조회">
+										</a>
+									</td>
+	
+									<td class=" "><input type="button" value="삭제"></td>
+								</tr>
+							</th:block>
 						</tbody>
 					</table>
 

@@ -9,7 +9,7 @@ public class Goods {
 	private String goodsLargeCate;
 	private String goodsSmallCate;
 	private String goodsRefurbName;
-	private String goodsNomalPrice;
+	private String goodsNormalPrice;
 	private String goodsRefurbPrice;
 	private String goodsRefurbCount;
 	private String goodsRefurbHarvestDate;
@@ -25,7 +25,6 @@ public class Goods {
 	private SellerStore sellerStore;
 	private StoreGoodsLarge storeGoodsLarge;
 	private StoreGoodsSmall storeGoodsSmall;
-	
 	public String getGoodsRefurbCode() {
 		return goodsRefurbCode;
 	}
@@ -74,11 +73,11 @@ public class Goods {
 	public void setGoodsRefurbName(String goodsRefurbName) {
 		this.goodsRefurbName = goodsRefurbName;
 	}
-	public String getGoodsNomalPrice() {
-		return goodsNomalPrice;
+	public String getGoodsNormalPrice() {
+		return goodsNormalPrice;
 	}
-	public void setGoodsNomalPrice(String goodsNomalPrice) {
-		this.goodsNomalPrice = goodsNomalPrice;
+	public void setGoodsNormalPrice(String goodsNormalPrice) {
+		this.goodsNormalPrice = goodsNormalPrice;
 	}
 	public String getGoodsRefurbPrice() {
 		return goodsRefurbPrice;
@@ -164,7 +163,6 @@ public class Goods {
 	public void setStoreGoodsSmall(StoreGoodsSmall storeGoodsSmall) {
 		this.storeGoodsSmall = storeGoodsSmall;
 	}
-	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -184,8 +182,8 @@ public class Goods {
 		builder.append(goodsSmallCate);
 		builder.append(", goodsRefurbName=");
 		builder.append(goodsRefurbName);
-		builder.append(", goodsNomalPrice=");
-		builder.append(goodsNomalPrice);
+		builder.append(", goodsNormalPrice=");
+		builder.append(goodsNormalPrice);
 		builder.append(", goodsRefurbPrice=");
 		builder.append(goodsRefurbPrice);
 		builder.append(", goodsRefurbCount=");
@@ -217,5 +215,7 @@ public class Goods {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 	
 }

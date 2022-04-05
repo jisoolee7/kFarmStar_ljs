@@ -11,17 +11,32 @@
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
 		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
-		
+		<!-- datepicker -->
+		<link th:href="@{/build/css/datepicker.css}" rel="stylesheet">
 		
 	</th:block>
+	
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
 		<!-- iCheck -->
     	<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+    	<!-- 제이쿼리 ui js -->
+	   	<script th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+	   	<!-- searchDate -->
+		<script th:src="@{/vendors/jquery/dist/searchDate.js}"></script>
 	</th:block>
+	
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
+		<!-- datepicker 맨 앞으로 띄워주는 코드 (나중에 공통 스크립트 searchDate.js 에 넣어두기) -->
 		<script>
+			$('.datepicker').datepicker({
+			    beforeShow: function() {
+			        setTimeout(function(){
+			            $('.ui-datepicker').css('z-index', 99999999999999);
+			        }, 0);
+			    }
+			});
 		</script>
 	</th:block>	
 	
@@ -58,11 +73,12 @@
 								<th class="column-title">상품 번호</th>
 								<th class="column-title">대분류</th>
 								<th class="column-title">소분류</th>
+								<th class="column-title">상품명</th>
 								<th class="column-title">가격</th>
 								<th class="column-title">아이디</th>
 								<th class="column-title">등록 날짜</th>
 								<th class="column-title">상세 조회</th>
-								<th class="bulk-actions" colspan="7"><a class="antoo"
+								<th class="bulk-actions" colspan="8"><a class="antoo"
 									style="color: #fff; font-weight: 500;">선택된 개수 ( <span
 										class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
 								</th>
@@ -70,59 +86,16 @@
 						</thead>
 
 						<tbody>
-							<tr class="even pointer">
+							<tr class="even pointer" th:if="${not #lists.isEmpty(goodsList)}" th:each="l : ${goodsList}">
 								<td class="a-center "><input type="checkbox" class="flat" name="table_records"></td>
-								<td class=" ">121000</td>
-								<td class=" ">사과/배/토마토</td>
-								<td class=" ">사과</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><a th:href="@{/goods/goodsDetail}"> <input type="button" value="상세 조회"></a></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121001</td>
-								<td class=" ">고구마/감자/당근</td>
-								<td class=" ">감자</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121002</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121003</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center "><input type="checkbox" class="flat"
-									name="table_records"></td>
-								<td class=" ">121004</td>
-								<td class=" ">망고/열대과일</td>
-								<td class=" ">패션후르츠</td>
-								<td class=" ">20,000</td>
-								<td class=" ">id005</td>
-								<td class=" ">2022/02/01</td>
-								<td class=" "><input type="button" value="상세 조회"></td>
+								<td class=" " th:text="${l.goodsRefurbCode}"></td>
+								<td class=" " th:text="${l.goodsLarge.goodsLargeName}"></td>
+								<td class=" " th:text="${l.goodsSmall.goodsSmallName}"></td>
+								<td class=" " th:text="${l.goodsRefurbName}"></td>
+								<td class=" " th:text="${l.goodsRefurbPrice}"></td>
+								<td class=" " th:text="${l.memberId}"></td>
+								<td class=" " th:text="${l.entryTime}"></td>
+								<td class=" "><a th:href="@{/goods/goodsDetail(goodsRefurbCode=${l.goodsRefurbCode})}" class="btn-sm btn-success">상세조회</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -146,26 +119,25 @@
                 </div>
 		</div>
               
-              <!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <h5 class="modal-title" id="exampleModalLabel">* 경고 *</h5>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        	정말 삭제하시겠습니까?
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-		        <button type="button" class="btn btn-primary" id="removeBtn">삭제</button>
-		      </div>
-		    </div>
-		  </div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">* 경고 *</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">정말 삭제하시겠습니까?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary" id="removeBtn">삭제</button>
+					</div>
+				</div>
+			</div>
 		</div>
-              
+			
 	</th:block>
 </html>

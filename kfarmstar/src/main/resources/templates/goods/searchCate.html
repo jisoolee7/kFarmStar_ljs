@@ -5,77 +5,60 @@
 	<div th:fragment="searchGoodsCateFragment">
 		<form th:action="@{/goods/goodsCateList}" method="get">	
 				
-				
-			<!-- START : 기간 검색 바 -->
-							
-			<div class="form-row pb-3">
-				<div class="pl-1 pt-1">
-					<button type="button" class="btn btn-light btn-sm">오늘</button>
-					<button type="button" class="btn btn-light btn-sm">1주</button>
-					<button type="button" class="btn btn-light btn-sm">1개월</button>
-					<button type="button" class="btn btn-light btn-sm">3개월</button>
-               	</div>
-				<div class="col-md-3 col-sm-3 ">
-					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
-						type="date" onfocus="this.type='date'"
-						onmouseover="this.type='date'" onclick="this.type='date'"
-						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-					<script>
-						function timeFunctionLong(input) {
-							setTimeout(function() {
-								input.type = 'text';
-							}, 60000);
-						}
-					</script>
+			  
+        	<!-- start : 기간 검색 바 -->
+						
+			<div class="form-row mb-2">
+				<div class="col-md-4 col-sm-4 searchBtn">
+					<label>기간 조회</label>
+               		<button type="button" class="btn btn-light btn-sm ml-2 	btn-date" 		name="filterDate" 		value="1">오늘</button>
+               		<button type="button" class="btn btn-light btn-sm 		btn-date" 		name="filterDate" 		value="2">1주</button>
+               		<button type="button" class="btn btn-light btn-sm 		btn-date" 		name="filterDate" 		value="3">1개월</button>
+               		<button type="button" class="btn btn-light btn-sm 		btn-date" 		name="filterDate" 		value="4">3개월</button>
+               		<button type="button" class="btn btn-light btn-sm 		btn-date" 		name="filterDate" 		value="5">6개월</button>
+               		<button type="button" class="btn btn-light btn-sm 		btn-date" 		name="filterDate" 		value="6">1년</button>
+                </div>
+				<div class="col-md-2 col-sm-2">
+					<input type="text" class="datepicker form-control" placeholder="연도-월-일" id="startDate">
 				</div>
 				<div class="align-self-center">
 					<i class="fa fa-minus"></i>
 				</div>
-				
-				<div class="col-md-3 col-sm-3 ">
-					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
-						type="date" onfocus="this.type='date'"
-						onmouseover="this.type='date'" onclick="this.type='date'"
-						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
-					<script>
-						function timeFunctionLong(input) {
-							setTimeout(function() {
-								input.type = 'text';
-							}, 60000);
-						}
-					</script>
+				<div class="col-md-2 col-sm-2">
+					<input type="text" class="datepicker form-control" placeholder="연도-월-일" id="endDate">
 				</div>
 			</div>
 			
 			<!-- END : 기간 검색 바 -->
-
-
-			<!-- START : 검색 바 -->
+			
+			<!-- start : 검색 바 -->
 			<div class="form-row">
 				<div class="form-group col-md-2">
 					<select id=" " class="form-control text-center">
-						<option selected>:: 선택  ::</option>
-						<option>옵션 1</option>
-						<option>옵션 2</option>
-						<option>옵션 3</option>
+						<option value="" selected>:: 선택 ::</option>
+						<option>대분류 번호</option>
+						<option>소분류 번호</option>
+						<option>대분류</option>
+						<option>소분류</option>
 					</select>
 				</div>
-				<div class="form-group col-md-7">
+				<div class="form-group col-md-6">
 					<input type="text" class="form-control" name="searchValue"
-						placeholder="Search" aria-label="Text input with dropdown button">
+						placeholder="Search" aria-label="Text input with button">
 				</div>
-				<div class="form-group col-md-2">
+				<div class="form-group col-md-4">
 					<div class="input-group-append">
-						<button class="btn btn-success" type="submit">검색</button>
+						<button type="button" class="btn btn-success">검색</button>
+						<button type="reset" class="btn btn-info" id="btn_reset">초기화</button>
 					</div>
 				</div>
 			</div>
 			<!-- END : 검색 바 -->
-			
 		</form>
+
 	</div>
 	
-	<!-- 선생님 예시
+	<!-- 예시
 	<div th:fragment="searchGoodsFragment">
 		<form th:action="@{/goods/goodsList}" method="get">
 			<select	name="searchKey">
