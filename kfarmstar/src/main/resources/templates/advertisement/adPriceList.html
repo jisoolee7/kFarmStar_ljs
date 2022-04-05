@@ -20,8 +20,7 @@
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
 	
-		</th:block>
-	
+	</th:block>	
 	
 	<th:block layout:fragment="customContents">
 		<div class="col-md-10 col-sm-10 offset-md-1">
@@ -32,28 +31,24 @@
 					</h2>
 					<div class="clearfix"></div>
 				</div>
-	
-				<div class="x_content">
-	
-					<p>
-						Add class
-						<code>bulk_action</code>
-						to table for bulk actions options on row select
-					</p>
-					<div>
-						<a th:href="@{/advertisement/addAdPrice}">
-							<button type="button"
-								class="btn btn-outline-secondary btn-sm float-right">단가
-								등록 버튼</button>
-						</a>
-					</div>
+
+                  <div class="x_content">
+                  
+                  
+
+						<div>
+							<a th:href="@{/advertisement/addAdPrice}">
+							<button type="button" class="btn btn-outline-primary btn-sm float-right">단가 등록 버튼</button>
+							</a>
+						</div>
 					<div class="table-responsive">
-						<table class="table text-center jambo_table bulk_action">
+						<table class="table jambo_table bulk_action text-center">
 							<thead>
 								<tr class="headings">
-									<th><input type="checkbox" id="check-all" class="flat">
-									</th>
-									<th class="column-title">광고 단가 번호</th>
+									<th>
+		                              <input type="checkbox" id="check-all" class="flat">
+		                            </th>
+		                            <th class="column-title">광고 단가 번호</th>
 									<th class="column-title">광고 종류</th>
 									<th class="column-title">1일 광고 가격</th>
 									<th class="column-title">등록자 아이디</th>
@@ -61,42 +56,30 @@
 									<th class="column-title">수정</th>
 									<th class="column-title">삭제</th>
 									<th class="bulk-actions" colspan="7">
-										<a class="antoo" style="color: #fff; font-weight: 500;">선택된 개수 ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+										<a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
 									</th>
 								</tr>
 							</thead>
-	
-							<tbody>
-								<th:block th:each="l : ${adPriceList}">
-									<tr>
-										<td class="a-center ">
-											<input type="checkbox" class="flat" name="table_records">
-										</td>
-										<td th:text="${l.adPriceCode}"></td>
-										<td th:text="${l.adCate}"></td>
-										<td th:text="${l.adPricePerDay}"></td>
-										<td th:text="${l.memberId}"></td>
-										<td th:text="${l.regDate}"></td>
-										<td class=" ">
-											<a th:href="@{/advertisement/modifyAdPrice}">
-												<input type="button" value="수정">
-											</a>
-										</td>
-										<td class=" ">
-											<a th:href="@{/advertisement/removeAdPrice}">
-												<input type="button" value="삭제">
-											</a>
-										</td>
-									</tr>
-								</th:block>
-	
-							</tbody>
+						<tbody>
+						<th:block th:if="${not #lists.isEmpty(adPriceList)}" th:each="l : ${adPriceList}">
+							<tr class="even pointer">
+								<td class="a-center ">
+									<input type="checkbox" class="flat" name="table_records">
+								</td>
+								<td th:text="${l.adPriceCode}"></td>
+								<td th:text="${l.adCate}"></td>
+								<td th:text="${l.adPricePerDay}"></td>
+								<td th:text="${l.memberId}"></td>
+								<td th:text="${l.entryTime}"></td>
+								<td class=" "><a th:href="@{/advertisement/modifyAdPrice(adPriceCode=${l.adPriceCode})}"><input type="button" value="수정"></a></td>
+								<td class=" "><a th:href="@{/advertisement/removeAdPrice}"><input type="button" value="삭제"></a></td>
+							</tr>
+						</th:block>
+						</tbody>
 						</table>
 					</div>
-	
 				</div>
 			</div>
 		</div>
-	
 	</th:block>
 </html>

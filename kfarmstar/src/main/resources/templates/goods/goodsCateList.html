@@ -11,40 +11,58 @@
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
 		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+		<!-- datepicker -->
+		<link th:href="@{/build/css/datepicker.css}" rel="stylesheet">
+		
 	</th:block>
+	
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
 		<!-- iCheck -->
     	<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+    	<!-- 제이쿼리 ui js -->
+	   	<script th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+	   	<!-- searchDate -->
+		<script th:src="@{/vendors/jquery/dist/searchDate.js}"></script>
 	</th:block>
+	
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
-	
+		<!-- datepicker 맨 앞으로 띄워주는 코드 (나중에 공통 스크립트 searchDate.js 에 넣어두기) -->
+		<script>
+			$('.datepicker').datepicker({
+			    beforeShow: function() {
+			        setTimeout(function(){
+			            $('.ui-datepicker').css('z-index', 99999999999999);
+			        }, 0);
+			    }
+			});
+		</script>
 	</th:block>	
 	
 	
 	<th:block layout:fragment="customContents">
-			<div class="col-md-12 col-sm-12">
-				<div class="x_panel">
-					<div class="x_title">
-						<h2>
-							상품 카테고리 목록<small>Goods cate list</small>
-						</h2>
-						<div class="clearfix"></div>
-					</div>
-		
-					<div class="x_content">
+		<div class="col-md-12 col-sm-12">
+			<div class="x_panel">
+				<div class="x_title">
+					<h2>
+						상품 카테고리 목록<small>Goods cate list</small>
+					</h2>
+					<div class="clearfix"></div>
+				</div>
+	
+				<div class="x_content">
 
-				<p>
-					Add class
-					<code>bulk_action</code>
-					to table for bulk actions options on row select
-				</p>
-				
-				<!-- START : 검색 바  -->
-				<div th:include="goods/searchCate :: searchGoodsCateFragment"></div><br>
-				<!-- END : 검색 바  -->
-				
+			<p>
+				Add class
+				<code>bulk_action</code>
+				to table for bulk actions options on row select
+			</p>
+			
+			<!-- START : 검색 바  -->
+			<div th:include="goods/searchCate :: searchGoodsCateFragment"></div><br>
+			<!-- END : 검색 바  -->
+			
 
 				<div class="table-responsive">
 				
@@ -82,13 +100,14 @@
 								<td class="a-center ">
 									<input type="checkbox" class="flat" name="table_records">
 								</td>
-								<td th:text="${l.goodsLargeCode}"></td>
-								<td th:text="${l.goodsSmallCode}"></td>
-								<td th:text="${l.goodsLargeName}"></td>
+								<td th:text="${l.goodsLargeCate}"></td>
+								<td th:text="${l.goodsSmallCate}"></td>
+								<td th:text="${l.goodsLarge.goodsLargeName}"></td>
 								<td th:text="${l.goodsSmallName}"></td>
-								<td th:text="${l.updateTime}"></td>
+								<td th:text="${l.entryTime}"></td>
 								<td class=" ">
-	                            	<a th:href="@{/goods/modifyGoodsCate}">
+	                         		<!-- /goods/modifyGoodsCate?goodsSmallCate=goods_small_cate_1 -->
+	                            	<a th:href="@{/goods/modifyGoodsCate(goodsSmallCate=${l.goodsSmallCate})}">
 	                            		<input type="button" value="수정">
 	                            	</a>
 	                            </td>

@@ -12,101 +12,90 @@ public class Member {
 	private String memberNickname;
 	private String memberAddr;
 	private String memberPhone;
+	private String memberPostNum;
+	private String memberDetailAddr;
 	private String memberBirth;
 	private String memberEmail;
 	private int memberPoint;
 	private String memberDate;
-	
 	public String getMemberId() {
 		return memberId;
 	}
-
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-
 	public String getMemberName() {
 		return memberName;
 	}
-
-
-
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-
 	public String getMemberLevel() {
 		return memberLevel;
 	}
-
 	public void setMemberLevel(String memberLevel) {
 		this.memberLevel = memberLevel;
 	}
-
 	public String getMemberPw() {
 		return memberPw;
 	}
-
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
 	}
-
 	public String getMemberNickname() {
 		return memberNickname;
 	}
-
 	public void setMemberNickname(String memberNickname) {
 		this.memberNickname = memberNickname;
 	}
-
 	public String getMemberAddr() {
 		return memberAddr;
 	}
-
 	public void setMemberAddr(String memberAddr) {
 		this.memberAddr = memberAddr;
 	}
-
 	public String getMemberPhone() {
 		return memberPhone;
 	}
-
 	public void setMemberPhone(String memberPhone) {
 		this.memberPhone = memberPhone;
 	}
-
+	public String getMemberPostNum() {
+		return memberPostNum;
+	}
+	public void setMemberPostNum(String memberPostNum) {
+		this.memberPostNum = memberPostNum;
+	}
+	public String getMemberDetailAddr() {
+		return memberDetailAddr;
+	}
+	public void setMemberDetailAddr(String memberDetailAddr) {
+		this.memberDetailAddr = memberDetailAddr;
+	}
 	public String getMemberBirth() {
 		return memberBirth;
 	}
-
 	public void setMemberBirth(String memberBirth) {
 		this.memberBirth = memberBirth;
 	}
-
 	public String getMemberEmail() {
 		return memberEmail;
 	}
-
 	public void setMemberEmail(String memberEmail) {
 		this.memberEmail = memberEmail;
 	}
-
 	public int getMemberPoint() {
 		return memberPoint;
 	}
-
 	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
-
 	public String getMemberDate() {
 		return memberDate;
 	}
-
 	public void setMemberDate(String memberDate) {
 		this.memberDate = memberDate;
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -124,6 +113,10 @@ public class Member {
 		builder.append(memberAddr);
 		builder.append(", memberPhone=");
 		builder.append(memberPhone);
+		builder.append(", memberPostNum=");
+		builder.append(memberPostNum);
+		builder.append(", memberDetailAddr=");
+		builder.append(memberDetailAddr);
 		builder.append(", memberBirth=");
 		builder.append(memberBirth);
 		builder.append(", memberEmail=");
@@ -135,5 +128,6 @@ public class Member {
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }

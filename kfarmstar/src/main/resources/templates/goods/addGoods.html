@@ -7,8 +7,6 @@
 		<title th:text="${title}"></title>
 	</th:block>
 	
-	
-	
 	<!-- 사용자 정의 Css -->
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
@@ -29,17 +27,14 @@
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
 		<!-- bootstrap-progressbar -->
-		<script
-			th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+		<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
 		<!-- iCheck -->
 		<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
 		<!-- bootstrap-daterangepicker -->
 		<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
-		<script
-			th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+		<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
 		<!-- bootstrap-wysiwyg -->
-		<script
-			th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
+		<script th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
 		<script th:src="@{/vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
 		<script th:src="@{/vendors/google-code-prettify/src/prettify.js}"></script>
 		<!-- jQuery Tags Input -->
@@ -53,225 +48,246 @@
 		<!-- Autosize -->
 		<script th:src="@{/vendors/autosize/dist/autosize.min.js}"></script>
 		<!-- jQuery autocomplete -->
-		<script
-			th:src="@{/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
+		<script th:src="@{/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js}"></script>
 		<!-- starrr -->
 		<script th:src="@{/vendors/starrr/dist/starrr.js}"></script>
 	</th:block>
 	
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
+		<script>
+	
+			$(function(){
+				
+				// 대분류와 소분류 연결
+				$("#goodsLargeCate").on('change', function(e) {
+                    var goodsLargeCate = $('select[name="goodsLargeCate"]').val();
+                    console.log(goodsLargeCate);
+                        $.ajax({
+                            url : '/goods/getSmallCateList',
+                            type : 'post',
+                            data : {
+                                'goodsLargeCate' : goodsLargeCate
+                            },
+                            dataType : 'json',
+                            success : function(data) {
+                                console.log(data);
+                                console.log(data.length);
+                                var txt1='<option value="none"> :: 소 분 류 선 택 :: </option>';
+                                    for(var i =0;i<data.length;i++)
+                                    {
+                                        txt1 +='<option value="'+data[i].goodsSmallCate+'"'    +'>' + data[i].goodsSmallName  +'</option>';
+                                    }
+                                    console.log(txt1);
+                                    $('#goodsSmallCate').empty();
+                                    $('#goodsSmallCate').append(txt1);
+                                }
+                        });
+       			 });
+				
+				
+				
+				
+				/* 	유효성 검사 수정 필요! */
+				/* function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null){
+						return false;
+					}
+					return true;
+				} */
+				
+				$('#addGoodsBtn').click(function(){
+					var isSubmit = true;
+					var inputObj = $('#addGoodsForm').find('input');
+					/* var inputObj2 = $('#addGoodsForm').find('textarea'); */
+					
+					/* $.each(inputObj, function(){
+						var inputData = $(this).val();
+						var result = validationCheck(inputData);
+						
+						// 사용자가 입력하지 않은 경우
+						if(!result){
+							alert('필수 항목입니다. 입력해주세요');
+							$(this).focus();
+							isSubmit = false;
+							return false;
+						}
+						
+					}); */
+					
+					
+						/* 
+						if($("input:radio[name=refurbOrganic]:checked").length < 1){
+						    alert('유기농 여부를 선택해주세요.');
+						    isSubmit = false;
+						    return false;
+						}
+						 */
+						
+						 
+						 
+						 
+					if(isSubmit) $('#addGoodsForm').submit();
+				});
+			});
+				
+		
+		</script>
 	</th:block>
-
-
-
-
+	
+	
+	
+	
 	<th:block layout:fragment="customContents">
 	
-		<div class="col-md-12 col-sm-12">
+		<div class="col-md-8 col-sm-8 offset-md-2">
 			<div class="x_panel">
 				<div class="x_title">
 					<h2>
-						리퍼브 상품 등록<small>Food refurb form</small>
+						리퍼브 상품 등록<small>Add Goods</small>
 					</h2>
-					 <div class="clearfix"></div>
+					<div class="clearfix"></div>
 				</div>
 				<div class="x_content">
 					<br />
-					<form class="form-horizontal form-label-left">
+									<!-- th:action="@{/goods/addGoods}" method="post" -->
+					<form class="form-horizontal form-label-left" id="addGoodsForm" th:action="@{/goods/addGoods}" method="post">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th scope="col" style="width: 15%;">#</th>
+									<th scope="col">리퍼브 상품 등록 관리</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">상품 정보</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbName">상품명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" id="goodsRefurbName" name="goodsRefurbName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbPrice">판매 가격</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" id="goodsRefurbPrice" name="goodsRefurbPrice">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsNormalPrice">일반 가격</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" id="goodsNormalPrice" name="goodsNormalPrice">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbCount">상품 수량</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" id="goodsRefurbCount" name="goodsRefurbCount">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbHarvestDate">상품 수확일</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="date" class="form-control" id="goodsRefurbHarvestDate" name="goodsRefurbHarvestDate">
+											</div>
+										</div>
 	
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">상품명</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<input type="text" class="form-control" placeholder="Goods Name">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">상품 가격</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<input type="number" class="form-control" placeholder="Goods Price">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">상품 수량</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<input type="number" class="form-control" placeholder="Goods Count">
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">상품 수확일</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<input type="date" class="form-control">
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">상품 설명
-									<span class="required">*</span>
-								</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<textarea class="form-control" rows="3"
-									placeholder="Goods Info"></textarea>
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">대분류</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<select class="form-control">
-									<option> ::  대 분 류   선 택   ::</option>
-									<option>Option one</option>
-									<option>Option two</option>
-									<option>Option three</option>
-									<option>Option four</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">소분류</label>
-							</div>
-							<div class="col-md-9 col-sm-9 ">
-								<select class="form-control">
-									<option> ::  소 분 류   선 택   ::</option>
-									<option>Option one</option>
-									<option>Option two</option>
-									<option>Option three</option>
-									<option>Option four</option>
-								</select>
-							</div>
-						</div>
-						
-						<div class="form-group row">
-							<div class="col-md-3 col-sm-3">
-								<label class="control-label">유기농 여부</label>
-							</div>
-							<div class="col-md-9 col-sm-9 align-self-center">
-								<div class="radio form-check form-check-inline">
-									<label class="form-check-label" for="inlineRadio1"> 
-										<input type="radio" class="flat" name="iCheck" id="inlineRadio1" value="option1"> 유기농 O
-									</label>
-								</div>
-								<div class="radio form-check form-check-inline">
-									<label class="form-check-label" for="inlineRadio2"> 
-										<input type="radio" class="flat" name="iCheck" id="inlineRadio2" value="option2" checked="checked"> 유기농 X
-									</label>
-								</div>
-							</div>
-						</div>
-						<div class="ln_solid"></div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsPostExplain">상품 설명</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<textarea class="form-control" rows="3" id="goodsPostExplain" name="goodsPostExplain"></textarea>
+											</div>
+										</div>
 	
-						<div id="alerts"></div>
-						<div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
-							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
-								<ul class="dropdown-menu">
-								</ul>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li>
-										<a data-edit="fontSize 5">
-											<p style="font-size:17px;">Huge</p>
-										</a>
-									</li>
-									<li>
-										<a data-edit="fontSize 3">
-											<p style="font-size:14px;">Normal</p>
-										</a>
-									</li>
-									<li>
-										<a data-edit="fontSize 1">
-											<p style="font-size:11px;">Small</p>
-										</a>
-									</li>
-								</ul>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
-								<a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
-								<a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
-								<a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
-								<a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
-								<a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
-								<a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
-								<a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
-								<a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
-								<a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
-								<div class="dropdown-menu input-append">
-									<input class="span2" placeholder="URL" type="text" data-edit="createLink" />
-									<button class="btn" type="button">Add</button>
-								</div>
-								<a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
-							</div>
-
-							<div class="btn-group">
-								<a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="fa fa-picture-o"></i></a>
-								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-							</div>
-
-							<div class="btn-group">
-								<a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
-								<a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
-							</div>
-						</div>
-
-						<div id="editor-one" class="editor-wrapper"></div>
-
-						<textarea name="descr" id="descr" style="display:none;"></textarea>
-
-
-						
-
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsLargeCate">대분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsLargeCate" name="goodsLargeCate">
+													<option>:: 대 분 류 선 택 ::</option>
+													<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
+													<option th:value="${l.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
+													</th:block>
+												</select>
+											</div>
+										</div>
 	
-	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsSmallCate">소분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsSmallCate" name="goodsSmallCate">
+													<option>:: 소 분 류 선 택 ::</option>
+												</select>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsRefurbOrganic">유기농 여부</label>
+											</div>
+											<div class="col-md-10 col-sm-10 align-self-center" id="goodsRefurbOrganic">
+												<div class="radio form-check form-check-inline">
+													<label class="form-check-label" for="organic">
+														<input type="radio" class="flat" name="goodsRefurbOrganic" id="organic" value="1"> 유기농 O
+													</label>
+												</div>
+												<div class="radio form-check form-check-inline">
+													<label class="form-check-label" for="nonOrganic"> 
+														<input type="radio" class="flat" name="goodsRefurbOrganic" id="nonOrganic" value="0"> 유기농 X
+													</label>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">상품 사진</th>
+									<td>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">상품 사진</label>
+											</div>
+											<div class="col-md-3 col-sm-3">
+												<img th:src="@{/img/exOrange.jpg}" class="img-fluid" alt="Responsive image">
+											</div>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="file">
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 						<div class="ln_solid"></div>
 						<div class="form-group">
-							<div class="col-md-7 col-sm-7  offset-md-5">
-								<button type="button" class="btn btn-primary">취소</button>
-								<button type="reset" class="btn btn-primary">초기화</button>
-								<button type="submit" class="btn btn-success">등록</button>
+							<div class="col-md-8 col-sm-8  offset-md-5">
+								<a th:href="@{/goods/goodsList}"><button type="button" class="btn btn-primary">취소</button></a>
+								<button type="button" class="btn btn-success" id="addGoodsBtn">상품등록</button>
 							</div>
 						</div>
-	
 					</form>
 				</div>
 			</div>
 		</div>
-	
-	
 	
 	</th:block>
 </html>
