@@ -1,5 +1,7 @@
 package com.kfarmstar.dto;
 
+import java.util.List;
+
 public class Goods {
 	private String goodsRefurbCode;
 	private String sellerStoreNum;
@@ -8,15 +10,18 @@ public class Goods {
 	private String memberId;
 	private String goodsLargeCate;
 	private String goodsSmallCate;
+	private String goodsRefurbSellState;
 	private String goodsRefurbName;
 	private String goodsNormalPrice;
 	private String goodsRefurbPrice;
 	private String goodsRefurbCount;
 	private String goodsRefurbHarvestDate;
 	private String goodsRefurbOrganic;
-	private String goodsRefurbImg;
+	
+	private String goodsPostSummary;
 	private String goodsPostExplain;
-	private String goodsRefurbSellState;
+	private String goodsDeliveryCharge;
+	private String goodsWeight;
 	private String entryTime;
 	
 	private GoodsLarge goodsLarge;
@@ -25,6 +30,15 @@ public class Goods {
 	private SellerStore sellerStore;
 	private StoreGoodsLarge storeGoodsLarge;
 	private StoreGoodsSmall storeGoodsSmall;
+	
+	private List<FileDto> fileList;
+
+	public List<FileDto> getFileList() {
+		return fileList;
+	}
+	public void setFileList(List<FileDto> fileList) {
+		this.fileList = fileList;
+	}
 	public String getGoodsRefurbCode() {
 		return goodsRefurbCode;
 	}
@@ -67,6 +81,12 @@ public class Goods {
 	public void setGoodsSmallCate(String goodsSmallCate) {
 		this.goodsSmallCate = goodsSmallCate;
 	}
+	public String getGoodsRefurbSellState() {
+		return goodsRefurbSellState;
+	}
+	public void setGoodsRefurbSellState(String goodsRefurbSellState) {
+		this.goodsRefurbSellState = goodsRefurbSellState;
+	}
 	public String getGoodsRefurbName() {
 		return goodsRefurbName;
 	}
@@ -103,11 +123,11 @@ public class Goods {
 	public void setGoodsRefurbOrganic(String goodsRefurbOrganic) {
 		this.goodsRefurbOrganic = goodsRefurbOrganic;
 	}
-	public String getGoodsRefurbImg() {
-		return goodsRefurbImg;
+	public String getGoodsPostSummary() {
+		return goodsPostSummary;
 	}
-	public void setGoodsRefurbImg(String goodsRefurbImg) {
-		this.goodsRefurbImg = goodsRefurbImg;
+	public void setGoodsPostSummary(String goodsPostSummary) {
+		this.goodsPostSummary = goodsPostSummary;
 	}
 	public String getGoodsPostExplain() {
 		return goodsPostExplain;
@@ -115,11 +135,17 @@ public class Goods {
 	public void setGoodsPostExplain(String goodsPostExplain) {
 		this.goodsPostExplain = goodsPostExplain;
 	}
-	public String getGoodsRefurbSellState() {
-		return goodsRefurbSellState;
+	public String getGoodsDeliveryCharge() {
+		return goodsDeliveryCharge;
 	}
-	public void setGoodsRefurbSellState(String goodsRefurbSellState) {
-		this.goodsRefurbSellState = goodsRefurbSellState;
+	public void setGoodsDeliveryCharge(String goodsDeliveryCharge) {
+		this.goodsDeliveryCharge = goodsDeliveryCharge;
+	}
+	public String getGoodsWeight() {
+		return goodsWeight;
+	}
+	public void setGoodsWeight(String goodsWeight) {
+		this.goodsWeight = goodsWeight;
 	}
 	public String getEntryTime() {
 		return entryTime;
@@ -180,6 +206,8 @@ public class Goods {
 		builder.append(goodsLargeCate);
 		builder.append(", goodsSmallCate=");
 		builder.append(goodsSmallCate);
+		builder.append(", goodsRefurbSellState=");
+		builder.append(goodsRefurbSellState);
 		builder.append(", goodsRefurbName=");
 		builder.append(goodsRefurbName);
 		builder.append(", goodsNormalPrice=");
@@ -192,12 +220,14 @@ public class Goods {
 		builder.append(goodsRefurbHarvestDate);
 		builder.append(", goodsRefurbOrganic=");
 		builder.append(goodsRefurbOrganic);
-		builder.append(", goodsRefurbImg=");
-		builder.append(goodsRefurbImg);
+		builder.append(", goodsPostSummary=");
+		builder.append(goodsPostSummary);
 		builder.append(", goodsPostExplain=");
 		builder.append(goodsPostExplain);
-		builder.append(", goodsRefurbSellState=");
-		builder.append(goodsRefurbSellState);
+		builder.append(", goodsDeliveryCharge=");
+		builder.append(goodsDeliveryCharge);
+		builder.append(", goodsWeight=");
+		builder.append(goodsWeight);
 		builder.append(", entryTime=");
 		builder.append(entryTime);
 		builder.append(", goodsLarge=");
@@ -212,10 +242,11 @@ public class Goods {
 		builder.append(storeGoodsLarge);
 		builder.append(", storeGoodsSmall=");
 		builder.append(storeGoodsSmall);
+		builder.append(", fileList=");
+		builder.append(fileList);
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 	
 }

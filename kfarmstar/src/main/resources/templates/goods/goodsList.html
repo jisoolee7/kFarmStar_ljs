@@ -95,7 +95,11 @@
 								<td class=" " th:text="${l.goodsRefurbPrice}"></td>
 								<td class=" " th:text="${l.memberId}"></td>
 								<td class=" " th:text="${l.entryTime}"></td>
-								<td class=" "><a th:href="@{/goods/goodsDetail(goodsRefurbCode=${l.goodsRefurbCode})}" class="btn-sm btn-success">상세조회</a></td>
+								<td class=" ">
+									<a th:href="@{/goods/goodsDetail(goodsRefurbCode=${l.goodsRefurbCode})}">
+										<input type="button" value="상세조회">
+									</a>
+									</td>
 							</tr>
 						</tbody>
 					</table>

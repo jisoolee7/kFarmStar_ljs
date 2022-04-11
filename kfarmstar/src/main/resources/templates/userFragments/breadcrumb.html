@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<div th:fragment="breadcrumbFragment">
+		<section class="breadcrumb-section set-bg" th:data-setbg="@{/asset/img/breadcrumb.jpg}">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2 th:text="${breadTitle}"></h2>
+                        <div class="breadcrumb__option">
+                            <a th:href="@{/userMain}"><span>Home</span></a>
+                            <span th:text="${breadSubTitle}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	</div>
+</html>
