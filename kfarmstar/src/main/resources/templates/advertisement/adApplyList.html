@@ -60,9 +60,9 @@
 								<th class="column-title">진행 상태</th>
 								<th class="column-title">신청 날짜</th>
                             	<th class="column-title">상세 조회</th>
-								<th class="column-title">삭제</th>
+								<th class="column-title">결제</th>
 								<th class="bulk-actions" colspan="7"><a class="antoo"
-									style="color: #fff; font-weight: 500;">Bulk Actions ( <span
+									style="color: #fff; font-weight: 500;">선택된 개수 ( <span
 										class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
 								</th>
 							</tr>
@@ -80,12 +80,14 @@
 									<td class=" " th:text="${l.adPermitState}"></td>
 									<td class=" " th:text="${l.adApplyDate}"></td>
 									<td class=" ">						
-										<a th:href="@{/advertisement/adApplyDetail(adApplyCode=${l.adApplyCode})}"> 	<!-- (adApplyCode=${l.adApplyCode}) -->
-											<input type="button" value="상세 조회">
+										<a th:href="@{/advertisement/adApplyDetail(adApplyCode=${l.adApplyCode})}"
+											class="btn-sm bg-green">상세조회
 										</a>
 									</td>
-	
-									<td class=" "><input type="button" value="삭제"></td>
+									<td class=" ">
+										<a href="#" class="btn-sm btn-danger" 
+											th:if="${l.adPermitState=='결제전'}">결제</a>
+									</td>
 								</tr>
 							</th:block>
 						</tbody>

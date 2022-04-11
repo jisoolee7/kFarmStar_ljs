@@ -97,7 +97,6 @@
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">기간</label>
-												<span class="required">*</span>
 											</div>
 											<div class="col-md-8 col-sm-8 ">
 												<!-- start : 기간 검색 바 -->
@@ -147,13 +146,12 @@
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 종류</label>
-												<span class="required">*</span>
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<select class="form-control text-center">
-													<option selected="selected">  : : 광 고 종 류 선 택  : :  </option>
-													<option>게시판 광고</option>
-													<option>배너 광고</option>
+													<option value="" selected="selected">  : : 광 고 종 류 선 택  : :  </option>
+													<option th:if="${not #lists.isEmpty(adPriceList)}" th:each="l : ${adPriceList}" 
+															th:text="${l.adCate}" th:value="${l.adPriceCode}"></option>
 												</select>
 											</div>
 										</div>
@@ -170,7 +168,6 @@
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 상품 주소</label>
-												<span class="required">*</span>
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<input type="text" class="form-control" placeholder="Ad Url">
@@ -181,7 +178,6 @@
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">광고 내용 
-												<span class="required">*</span>
 												</label>
 											</div>
 											<div class="col-md-8 col-sm-8">

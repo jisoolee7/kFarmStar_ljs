@@ -11,15 +11,20 @@
 	<th:block layout:fragment="customCss">
 		<!-- iCheck -->
 		<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+		<!-- datepicker -->
+		<link th:href="@{/build/css/datepicker.css}" rel="stylesheet">
 	</th:block>
 	<!-- 사용자 정의 JsScript 파일-->
 	<th:block layout:fragment="customJsScript">
 		<!-- iCheck -->
     	<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+    	<!-- 제이쿼리 ui js -->
+	   	<script th:src="@{https://code.jquery.com/ui/1.12.1/jquery-ui.js}"></script>
+	   	<!-- searchDate -->
+		<script th:src="@{/vendors/jquery/dist/searchDate.js}"></script>
 	</th:block>
 	<!-- 사용자 정의 Script-->
 	<th:block layout:fragment="customScript">
-	
 	</th:block>	
 	
 	
@@ -36,17 +41,25 @@
 					<div class="x_content">
 
 						<p>
-							현재 진행중인 광고 목록
+							(관리자 화면) 현재 진행중인 광고 목록
 						</p>
-				
-
 				
 				<!-- START : 검색 바 -->
 					<div th:include="advertisement/searchAd :: searchAdvertisingListFragment"></div><br>
 				<!-- END : 검색 바 -->
 
-
 				<div class="table-responsive">
+				
+					<div class="clearfix">
+						<div class="float-left">
+							Total : <span></span>
+						</div>
+						<div class="float-right pr-2">
+							<button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">선택 삭제</button>
+						</div>
+					</div>
+					
+					
 					<table class="table text-center jambo_table bulk_action">
 						<thead>
 							<tr class="headings">
@@ -59,9 +72,9 @@
 								<th class="column-title">진행 상태</th>
 								<th class="column-title">시작 날짜</th>
 								<th class="column-title">종료 날짜</th>
-                            	<th class="column-title">상세 조회</th>
-								<th class="column-title">삭제</th>
-								<th class="bulk-actions" colspan="7"><a class="antoo"
+                            	<th class="column-title">신청 정보</th>
+								<th class="column-title">결제 정보</th>
+								<th class="bulk-actions" colspan="8"><a class="antoo"
 									style="color: #fff; font-weight: 500;">Bulk Actions ( <span
 										class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
 								</th>
@@ -69,76 +82,26 @@
 						</thead>
 
 						<tbody>
+						<th:block th:if="${not #lists.isEmpty(advertisingList)}" th:each="l : ${advertisingList}">
 							<tr class="even pointer">
 								<td class="a-center ">
 									<input type="checkbox" class="flat" name="table_records">
 								</td>
-								<td class=" ">121000040</td>
-								<td class=" ">게시판 광고</td>
-								<td class=" ">id008</td>
-								<td class=" ">광고중</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">
-									<a th:href="@{/advertisement/adApplyDetail}"> 
-										<input type="button" value="상세 조회">
+								<td class=" " th:text="${l.adApplyCode}"></td>
+								<td class=" " th:text="${l.adCate}"></td>
+								<td class=" " th:text="${l.memberId}"></td>
+								<td class=" " th:text="${l.adPermitState}"></td>
+								<td class=" " th:text="${l.adStartDate}"></td>
+								<td class=" " th:text="${l.adEndDate}"></td>
+								<td class=" ">						
+									<a th:href="@{/advertisement/adApplyDetail(adApplyCode=${l.adApplyCode})}">
+										<input type="button" value="신청 정보">
 									</a>
 								</td>
 
-								<td class=" "><input type="button" value="삭제"></td>
+								<td class=" "><input type="button" value="결제 정보"></td>
 							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000041</td>
-								<td class=" ">배너 광고</td>
-								<td class=" ">id020</td>
-								<td class=" ">광고중</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000042</td>
-								<td class=" ">게시판 광고</td>
-								<td class=" ">id032</td>
-								<td class=" ">광고중</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="odd pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">게시판 광고</td>
-								<td class=" ">id032</td>
-								<td class=" ">광고 완료</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
-							<tr class="even pointer">
-								<td class="a-center ">
-									<input type="checkbox" class="flat" name="table_records">
-								</td>
-								<td class=" ">121000043</td>
-								<td class=" ">배너 광고</td>
-								<td class=" ">id055</td>
-								<td class=" ">광고 완료</td>
-								<td class=" ">22/02/01</td>
-								<td class=" ">22/02/01</td>
-                       		<td class=" "><input type="button" value="상세 조회"></td>
-								<td class=" "><input type="button" value="삭제"></td>
-							</tr>
+						</th:block>
 						</tbody>
 					</table>
 

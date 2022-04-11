@@ -67,11 +67,11 @@
 					<form id="addAdPriceForm" class="form-horizontal form-label-left" th:action="@{/advertisement/addAdPrice}" method="post">
 	
 						<div class="form-group row">
-							<label class="control-label col-md-3 col-sm-3">등록자 아이디</label>
+							<label class="control-label col-md-3 col-sm-3" for="memberId">등록자 아이디</label>
 							<div class="col-md-9 col-sm-9 ">
 							<!-- 임의로 넣은 value="id002" 후에 로그인 세션 아이디값 가져오기 -->
 								<input type="text" class="form-control" readonly="readonly"
-								value="id002" placeholder="로그인 세션 아이디값 가져오기">
+								name="memberId" id="memberId" th:value="${session.SID}">
 							</div>
 						</div>
 						

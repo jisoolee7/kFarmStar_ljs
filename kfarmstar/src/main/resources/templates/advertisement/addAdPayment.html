@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/default}">
+	
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<!-- 사용자 정의 Css -->
+	<th:block layout:fragment="customCss">
+	</th:block>
+	
+	<!-- 사용자 정의 JsScript 파일-->
+	<th:block layout:fragment="customJsScript">
+		<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+		<script>
+		$(function(){
+			$('#modifyButton').click(function(){
+				$('input').attr("readonly",false);
+				$('#memberId').attr("readonly",true);
+				$('select').attr("disabled",false);
+			});
+		});
+		function searchPostNum() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	            	
+	            	var addr = '';
+	            	var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+	                
+	                document.getElementById('deliveryPostNum').value = data.zonecode;
+	                document.getElementById('deliveryAddr').value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById('deliveryDetailAddr').focus();
+	                
+	            }
+	        }).open();
+	    }
+		
+		$(function(){
+								    	  
+			var 
+			paymentTypeBank = $('.paymentTypeBank'),
+			paymentTypeMobile = $('.paymentTypeMobile'),
+			paymentTypeCard = $('.paymentTypeCard'),
+			paymentValue = $('select[name="paymentOption"]').val();
+			
+			if(paymentValue == '휴대폰'){
+				paymentTypeBank.css('display', 'none');
+				paymentTypeMobile.css('display', 'block');
+				paymentTypeCard.css('display', 'none');
+			}else if(paymentValue == '무통장입금'){
+				paymentTypeBank.css('display', 'block');
+				paymentTypeMobile.css('display', 'none');
+				paymentTypeCard.css('display', 'none');
+			}else if(paymentValue == '신용카드'){
+				paymentTypeBank.css('display', 'none');
+				paymentTypeMobile.css('display', 'none');
+				paymentTypeCard.css('display', 'block');
+			}
+			
+			$('select[name="paymentOption"]').change(function(){
+				
+				var val = $(this).val();
+				if(val == '휴대폰'){
+					paymentTypeBank.css('display', 'none');
+					paymentTypeMobile.css('display', 'block');
+					paymentTypeCard.css('display', 'none');
+				}else if(val == '무통장입금'){
+					paymentTypeBank.css('display', 'block');
+					paymentTypeMobile.css('display', 'none');
+					paymentTypeCard.css('display', 'none');
+				}else if(val == '신용카드'){
+					paymentTypeBank.css('display', 'none');
+					paymentTypeMobile.css('display', 'none');
+					paymentTypeCard.css('display', 'block');
+				}
+			})
+			
+		});
+		</script>
+		
+	</th:block>
+	
+	<th:block layout:fragment="customContents">
+
+	<div class="col-md-8 col-sm-8 offset-md-2">
+		<div class="x_panel">
+			<div class="x_title">
+				<h2>
+					결제 내역 상세 정보<small>Payment Details Info</small>
+				</h2>
+				<div class="clearfix"></div>
+			</div>
+			<div class="x_content">
+				<form class="form-horizontal form-label-left">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th scope="col" style="width: 15%;">#</th>
+								<th scope="col">결제내역관리</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">광고 결제 정보</th>
+								<td>
+									<div class="form-group row">
+										<div class="col-md-2 col-sm-2">
+											<label class="control-label">광고 신청 번호</label>
+										</div>
+										<div class="col-md-8 col-sm-8 ">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-2 col-sm-2">
+											<label class="control-label">광고 기간</label>
+										</div>
+										<div class="col-md-8 col-sm-8 ">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">결제 정보</th>
+								<td>
+									<div class="form-group row">
+										<div class="col-md-2 col-sm-2">
+											<label class="control-label" for="memberId">아이디</label>
+										</div>
+										<div class="col-md-8 col-sm-8">
+											<input type="text" class="form-control" name="memberId" readonly="readonly">
+										</div>
+									</div>
+									<div class="form-group row">
+										<div class="col-md-2 col-sm-2">
+											<label class="control-label">결제 종류</label>
+										</div>
+										<div class="col-md-8 col-sm-8">
+											<select class="form-control text-center" name="paymentOption" >
+										        <option >무통장입금</option>
+										        <option>휴대폰</option>
+										        <option>신용카드</option>
+									      </select>
+										</div>
+									</div>
+									<div class="paymentTypeMobile">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label">결제 휴대폰 통신사</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<select class="form-control text-center" name="paymentType.paymentCarrier">
+											        <option value=""> :: 선택 :: </option>
+											        <option >SKT</option>
+											        <option>KT</option>
+											        <option>UPLUS</option>
+										      </select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="paymentType.paymentPhoneNum">결제 휴대폰 번호</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="number" class="form-control" name="paymentType.paymentPhoneNum">
+											</div>
+										</div>
+									</div>
+									<div class="paymentTypeBank">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="paymentType.paymentAccountInfo">무통장 결제 은행</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="text" class="form-control" name="paymentType.paymentAccountInfo">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="paymentType.paymentAccountNumber">무통장 결제 계좌번호</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="text" class="form-control" name="paymentType.paymentAccountNumber">
+											</div>
+										</div>
+									</div>
+									<div class="paymentTypeCard">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="paymentType.paymentCardType">신용카드 결제 은행</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="text" class="form-control" name="paymentType.paymentCardType">
+											</div>
+										</div>
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="paymentType.paymentCardNum">신용카드 번호</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="number" class="form-control" readonly="readonly" name="paymentType.paymentCardNum">
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row">상품 결제 정보</th>
+								<td>
+									<div class="form-group row">
+										<div class="col-md-2 col-sm-2">
+											<label class="control-label" for="lastPaymentPrice">총 결제 금액</label>
+										</div>
+										<div class="col-md-8 col-sm-8">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="ln_solid"></div>
+					<div class="form-group">
+						<div class="col-md-8 col-sm-8  offset-md-4">
+							<button type="button" class="btn btn-primary">취소</button>
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">삭제</button>
+							<button type="button" class="btn btn-success" id="modifyButton">수정</button>
+							<button type="submit" class="btn btn-info">저장</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+</th:block>
+</html>

@@ -2,6 +2,8 @@ package com.kfarmstar.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -29,24 +31,33 @@ public class AdController {
 		this.adService = adService;
 	}
 	
-	
+	/**
+	 * 광고 신청 후 상세 화면
+	 * @param model
+	 * @param adApplyCode
+	 */
 	@GetMapping("/adApplyDetail")
 	public String getDetailAdApplyInfo(Model model
-									,@RequestParam(name="adApplyCode", required = false) String adApplyCode) {
+									, HttpSession session
+									, @RequestParam(name="adApplyCode", required = false) String adApplyCode) {
 		
+		String sessionLevel = (String) session.getAttribute("SLEVEL");
 		AdApply adApply = adService.getAdApplyByCode(adApplyCode);
+		List<AdPrice> adPriceList = adService.getAdPriceList();
 		log.info("광고별 상세정보");
 		log.info("광고 폼 쿼리스트링 adApplyCode : {}", adApplyCode);
 		model.addAttribute("title", "FoodRefurb : 광고 상세 정보");
 		model.addAttribute("titleName", "광고 상세 정보");
 		model.addAttribute("adApply", adApply);
+		model.addAttribute("adPriceList", adPriceList);
+		model.addAttribute("sessionLevel", sessionLevel);
 		
 		return "advertisement/adApplyDetail";
 	}
 
 	
 	/**
-	 * 광고신청 상세화면(adApplyDetail)에서 저장 버튼을 클릭했을 때
+	 * 광고신청 상세화면(adApplyDetail)에서  수정처리 (수정 -> 저장 버튼 클릭시)
 	 * 
 	 */
 	@PostMapping("/modifyAdApply")
@@ -62,26 +73,64 @@ public class AdController {
 	 * 광고 신청 목록 화면
 	 */
 	@GetMapping("/adApplyList")
-	public String getAdApplyList(Model model) {
-		
+	public String getAdApplyList(Model model
+								, @RequestParam(name="adApplyCode", required = false) String adApplyCode) {
 		log.info("광고 신청 목록 화면");
 		
 		List<AdApply> adApplyList = adService.getAdApplyList();
+		AdApply adApply = adService.getAdApplyByCode(adApplyCode);
 		model.addAttribute("title", "FoodRefurb : 광고 신청 목록");
 		model.addAttribute("titleName", "광고 신청 목록");
 		model.addAttribute("adApplyList", adApplyList);
+		model.addAttribute("adApply", adApply);
 		
 		return "advertisement/adApplyList";
 	}
 
 	
-	
+	/**
+	 * 광고 신청 화면
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/addAdApply")
-	public String addApplyAd(Model model) {
+	public String addAdApply(Model model) {
+		
+		List<AdPrice> adPriceList = adService.getAdPriceList();
+		
 		model.addAttribute("title", "FoodRefurb : 광고 신청");
 		model.addAttribute("titleName", "광고 신청");
+		model.addAttribute("adPriceList", adPriceList);
 		
 		return "advertisement/addAdApply";
+	}
+	
+	
+	/**
+	 * 광고 승인 처리
+	 * (관리자 : 신청 상세 화면을 보고 승인 버튼을 누르면 진행 상태가 결제전 으로 바뀐다)
+	 * @param adApplyCode
+	 */
+	@GetMapping("/adApproveUpdate")
+	public String adApproveUpdate(AdApply adApply, HttpSession session) {
+		log.info("광고 승인 처리");
+		String sessionId = (String) session.getAttribute("SID");
+		adService.adApproveUpdate(adApply, sessionId);
+		return "redirect:/advertisement/adApplyList";
+	}
+	
+	
+	/**
+	 * 광고 거절 처리
+	 * (관리자 : 신청 상세 화면을 보고 승인 버튼을 누르면 진행 상태가 결제전 으로 바뀐다)
+	 * @param adApplyCode
+	 */
+	@GetMapping("/adApproveCancle")
+	public String adApproveCancle(AdApply adApply, HttpSession session) {
+		log.info("광고 거절 처리");
+		String sessionId = (String) session.getAttribute("SID");
+		adService.adApproveCancle(adApply, sessionId);
+		return "redirect:/advertisement/adApplyList";
 	}
 	
 	
@@ -97,6 +146,7 @@ public class AdController {
 		
 		return "advertisement/addAdPrice";
 	}
+	
 	
 	/**
 	 * 광고 단가 등록 처리
@@ -122,6 +172,15 @@ public class AdController {
 	
 	
 	
+	@GetMapping("/addAdPayment")
+	public String addAdPayment(Model model) {
+		model.addAttribute("title", "FoodRefurb : 광고 결제");
+		model.addAttribute("titleName", "광고 결제");
+		
+		return "advertisement/addAdPayment";
+	}
+	
+	
 	@GetMapping("/adPaymentDetail")
 	public String adPaymentDetail(Model model) {
 		model.addAttribute("title", "FoodRefurb : 광고 결제 상세 정보");
@@ -129,6 +188,7 @@ public class AdController {
 		
 		return "advertisement/adPaymentDetail";
 	}
+	
 	
 	@GetMapping("/adPaymentList")
 	public String getAdPaymentList(Model model) {
@@ -170,10 +230,23 @@ public class AdController {
 		return "advertisement/adRefundList";
 	}
 	
+	
+	/**
+	 * 결제완료, 광고중, 광고완료 상태인 광고 목록
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/advertisingList")
-	public String getAdvertisingList(Model model) {
+	public String getAdvertisingList(Model model
+									, @RequestParam(name="adApplyCode", required = false) String adApplyCode) {
+		List<AdApply> advertisingList = adService.getAdvertisingList();
+		AdApply adApply = adService.getAdApplyByCode(adApplyCode);
+		
+		
 		model.addAttribute("title", "FoodRefurb : 광고 목록");
 		model.addAttribute("titleName", "광고 목록");
+		model.addAttribute("advertisingList", advertisingList);
+		model.addAttribute("adApply", adApply);
 		
 		return "advertisement/advertisingList";
 	}

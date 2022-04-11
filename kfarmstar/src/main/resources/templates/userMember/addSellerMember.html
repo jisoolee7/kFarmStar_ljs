@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{userLayout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customCss">
+		<style>
+			.niceWd .nice-select{width: 100%;}
+		</style>
+	</th:block>
+	
+	<th:block layout:fragment="customJsScript">
+		<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+		<script>
+			$(function(){
+				
+				function validationCheck(data){
+					if(typeof data == 'undefined' || data == '' || data == null){
+						return false;
+					}
+					return true;
+				}
+				
+				$('#idCheck').click(function(){
+					var memberId = $('input[name="memberId"]').val();
+					//console.log(validationCheck(memberId));
+					var vCheck = validationCheck(memberId);
+					if(vCheck){
+						$.ajax({
+							 url: '/userMember/idCheck'
+							,type: 'POST'
+							,data: {'memberId' : memberId}
+							,dataType: 'json'
+							,success: function(data){
+								console.log(data);
+								// 화면에서 맨처음 아이디를 제외한 모든 입력하는 요소는 비활성화 (HTML 속성 추가 disabled="disabled") 
+								// 아이디 중복이 발생 않은 경우(회원가입 O) 입력하는 요소는 활성화
+								if(data){
+									$('#idCheckResult').text('사용 가능한 아이디 입니다.');
+									$('.addSellerForm input').prop('disabled', false);
+									$('.addSellerForm select').prop('disabled', false);
+									$('.addSellerForm button').prop('disabled', false);
+								}else{									
+									// 아이디 중복이 발생하는 경우(회원가입 X) 입력하는 요소는 비활성화
+									$('#idCheckResult').text('중복된 아이디가 있습니다.');
+									$('#idCheckResult').attr('color','red');
+									$('.addSellerForm input').not('input[name="memberId"]').prop('disabled', true);
+									$('.addSellerFormbutton').not('#idCheck').prop('disabled', true);
+									$('.addSellerForm select').prop('disabled', true);
+								}
+							}
+						});
+					}
+					
+				});
+				
+				$('#addSellerMemberBtn').click(function(){
+					var isSubmit = true;
+					var inputObj = $('.addSellerForm').find('input');
+					
+					$.each(inputObj, function(){
+						var inputData = $(this).val();
+						var result = validationCheck(inputData);
+						
+						// 사용자가 입력하지 않은 경우
+						if(!result){
+							alert('필수 항목입니다. 입력해주세요');
+							$(this).focus();
+							isSubmit = false;
+							return false;
+						}
+					});
+					
+					console.log('유효여부 폼전송할건지?' + isSubmit )
+					
+					if(isSubmit) $('#addSellerMemberForm').submit();
+				});
+			});
+		</script>
+		<script>
+		function searchPostNum() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	            	
+	            	var addr = '';
+	            	var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+	                
+	                document.getElementById('memberPostNum').value = data.zonecode;
+	                document.getElementById('memberAddr').value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById('memberDetailAddr').focus();
+	                
+	            }
+	        }).open();
+	    }
+		</script>
+		<script>
+		function searchSellerPostNum() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	            	
+	            	var addr = '';
+	            	var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+	                
+	                document.getElementById('sellerStorePostNum').value = data.zonecode;
+	                document.getElementById('sellerStoreAddr').value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById('sellerStoreDetailAddr').focus();
+	                
+	            }
+	        }).open();
+	    }
+		</script>
+	</th:block>	
+
+	<th:block layout:fragment="customContents">
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+        	<form id="addSellerMemberForm" th:action="@{/userMember/addSellerMember}" method="post">
+	            <div class="checkout__form">
+	                <h4>회원가입</h4>
+	                    <div class="row">
+	                        <div class="offset-lg-3 col-lg-9 col-md-9">
+	                            <div class="row">
+	                            	<div class="col-md-2">
+	                            		<label>아이디<span>*</span></label>
+	                            	</div>
+	                                <div class="col-md-4">
+	                                    <div class="checkout__input">
+	                                        <input type="text" name="memberId">
+	                                    </div>
+	                                </div>
+	                                <div class="col-md-2">
+										<button type="button" class="btn btn-success" id="idCheck">중복체크</button>
+	                                </div>
+		                                <div class="col-md-4">
+		                                	<span id="idCheckResult"></span>
+		                                </div>
+	                            </div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>비밀번호<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="password" name="memberPw">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>이름<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="memberName">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>닉네임<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="memberNickname">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>생년월일<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="date" name="memberBirth">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>주소<span>*</span></label>
+									</div>
+									<div class="col-md-4">
+										<div class="checkout__input">
+											<input type="text" name="memberPostNum" id="memberPostNum" placeholder="우편번호">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="checkout__input">
+											<button type="button" class="btn btn-info" id="postNum" onclick="searchPostNum()">우편번호</button>
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+	                                <div class="offset-md-2 col-md-6">
+		                                <div class="checkout__input">
+		                                	<input type="text" id="memberAddr" name="memberAddr" placeholder="주소">
+		                                </div>
+	                                </div>
+								</div>
+								<div class="row">
+	                                <div class="offset-md-2 col-md-6">
+		                                <div class="checkout__input">
+		                                	<input type="text" name="memberDetailAddr" id="memberDetailAddr" placeholder="상세주소">
+		                                </div>
+	                                </div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<label>이메일<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="memberEmail" placeholder="이메일입력">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<label>전화번호<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="memberPhone" placeholder="전화번호입력">
+										</div>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	            </div>
+	            <div class="checkout__form">
+	                <h4>사업장 정보 기입</h4>
+	                    <div class="row">
+	                        <div class="offset-lg-3 col-lg-9 col-md-9">
+	                            <div class="row">
+	                            	<div class="col-md-2">
+	                            		<label>사업장 이름<span>*</span></label>
+	                            	</div>
+	                                <div class="col-md-6">
+	                                    <div class="checkout__input">
+	                                        <input type="text" name="sellerStoreName">
+	                                    </div>
+	                                </div>
+	                            </div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>사업자 등록번호<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="sellerLicenseNum">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>사업장 전화번호<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+										<div class="checkout__input">
+											<input type="text" name="sellerStorePhone">
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+									<div class="col-md-2">
+										<label>사업장 주소<span>*</span></label>
+									</div>
+									<div class="col-md-4">
+										<div class="checkout__input">
+											<input type="text" name="sellerStorePostNum" id="sellerStorePostNum" placeholder="우편번호">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="checkout__input">
+											<button type="button" class="btn btn-info" id="sellerPostNum" onclick="searchSellerPostNum()">우편번호</button>
+										</div>
+									</div>
+								</div>
+	                            <div class="row">
+	                                <div class="offset-md-2 col-md-6">
+		                                <div class="checkout__input">
+		                                	<input type="text" id="sellerStoreAddr" name="sellerStoreAddr" placeholder="주소">
+		                                </div>
+	                                </div>
+								</div>
+								<div class="row">
+	                                <div class="offset-md-2 col-md-6">
+		                                <div class="checkout__input">
+		                                	<input type="text" name="sellerStoreDetailAddr" id="sellerStoreDetailAddr" placeholder="상세주소">
+		                                </div>
+	                                </div>
+								</div>
+								<div class="row niceWd mb-3">
+									<div class="col-md-2">
+										<label>과세구분<span>*</span></label>
+									</div>
+									<div class="col-md-6">
+											<select name="sellerTaxType">
+												<option value="none" selected="selected"> :: 과세구분 :: </option>
+												<option value="개인사업자">개인사업자</option>
+												<option value="법인사업자">법인사업자</option>
+												<option value="과세사업자">과세사업자</option>
+												<option value="면세사업자">면세사업자</option>
+												<option value="일반과세자">일반과세자</option>
+												<option value="간이과세자">간이과세자</option>
+											</select>
+									</div>
+								</div>
+								<div class="row">
+									<div class="offset-md-3 md-6 offset-md-3">
+										<a th:href="@{/userMain}"><button type="button" class="btn btn-primary mr-3">취소</button></a>
+										<button type="submit" class="btn btn-info ml-3" id="addSellerMemberBtn">회원가입</button>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	            	</div>
+            	</form>
+        	</div>
+    </section>
+    <!-- Checkout Section End -->
+	</th:block>
+</html>

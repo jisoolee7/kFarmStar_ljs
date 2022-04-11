@@ -32,10 +32,6 @@
 		<!-- bootstrap-daterangepicker -->
 		<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
 		<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
-		<!-- bootstrap-wysiwyg -->
-		<script th:src="@{/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js}"></script>
-		<script th:src="@{/vendors/jquery.hotkeys/jquery.hotkeys.js}"></script>
-		<script th:src="@{/vendors/google-code-prettify/src/prettify.js}"></script>
 		<!-- jQuery Tags Input -->
 		<script th:src="@{/vendors/jquery.tagsinput/src/jquery.tagsinput.js}"></script>
 		<!-- Switchery -->
@@ -61,6 +57,8 @@
 					$('input').attr("readonly",false);
 					$('select').attr("disabled",false);
 					$('textarea').attr("readonly",false);
+					$('#saveButton').removeAttr( "hidden" );
+					$(this).attr("hidden",true);
 				});
 			});
 		</script>
@@ -177,8 +175,10 @@
 											<div class="col-md-8 col-sm-8">
 												<select class="form-control text-center" name="adCate" id="adCate" th:value="${adApply.adCate}" disabled="disabled">
 													<option value="">  : : 광 고 종 류 선 택  : :  </option>
-													<option th:selected="${adApply.adCate=='게시판 광고'}">게시판 광고</option>
-													<option th:selected="${adApply.adCate=='배너 광고'}">배너 광고</option>
+													<option th:if="${not #lists.isEmpty(adPriceList)}" th:each="l : ${adPriceList}" 
+															th:text="${l.adCate}" th:value="${l.adPriceCode}" th:selected="${adApply.adCate==l.adCate}"></option>
+												<!-- 	<option th:selected="${adApply.adCate=='게시판 광고'}">게시판 광고</option>
+													<option th:selected="${adApply.adCate=='배너 광고'}">배너 광고</option> -->
 												</select>
 											</div>
 										</div>
@@ -240,8 +240,17 @@
 							<div class="col-md-6 col-sm-6 offset-md-4">
 								<a th:href="@{/advertisement/adApplyList}"><button type="button" class="btn btn-primary">취소</button></a>
 								<button type="button" class="btn btn-danger">삭제</button>
-								<button type="button" class="btn btn-success" id="modifyButton">수정</button>
-								<button type="submit" class="btn btn-info">저장</button>
+								<button type="button" class="btn btn-info" id="modifyButton">수정</button>
+								<button type="submit" class="btn btn-info" id="saveButton" hidden="hidden">저장</button>
+								<a th:href="@{/advertisement/adApproveUpdate(adApplyCode=${adApply.adApplyCode})}" 
+									th:if="${adApply.adPermitState}=='신청중' and ${sessionLevel}=='관리자'" role="button" 
+									class="btn btn-success" aria-pressed="true">승인</a>
+								<a th:href="@{/advertisement/adApproveCancle(adApplyCode=${adApply.adApplyCode})}" 
+									th:if="${adApply.adPermitState}=='신청중' and ${sessionLevel}=='관리자'" role="button"
+									 class="btn btn-warning" aria-pressed="true">거절</a>	
+								<a th:href="@{/advertisement/adApproveCancle(adApplyCode=${adApply.adApplyCode})}" 
+									th:if="${adApply.adPermitState}=='결제전' and ${sessionLevel}=='관리자'" role="button" 
+									class="btn btn-warning" aria-pressed="true">승인취소</a>
 							</div>
 						</div>
 	

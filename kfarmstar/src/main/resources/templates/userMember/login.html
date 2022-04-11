@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{userLayout/default}">
+	<!-- 사용자 정의 title -->
+	<th:block layout:fragment="customTitle">
+		<title th:text="${title}"></title>
+	</th:block>
+	
+	<th:block layout:fragment="customCss">
+		
+	</th:block>
+	
+	<th:block layout:fragment="customJsScript">
+	</th:block>
+	
+	<!-- 사용자 정의 Script-->
+	<th:block layout:fragment="customScript">
+		<script>
+		$(function(){
+			function validationCheck(data){
+				if(typeof data == 'undefined' || data == '' || data == null){
+					return false;
+				}
+				return true;
+			}
+			
+			$('#loginBtn').click(function(){
+				var isSubmit = true;
+				var inputObj = $('#loginForm').find('input');
+				
+				$.each(inputObj, function(){
+					var inputId = $(this).attr('id');
+					var inputLabel = $('label[for="' + inputId + '"]').text();
+					var inputData = $(this).val();
+					var result = validationCheck(inputData);
+					
+					// 사용자가 입력하지 않은 경우
+					if(!result){
+						alert(inputLabel + '을 입력해주세요');
+						$(this).focus();
+						isSubmit = false;
+						return false;
+					}
+				});
+				
+				if(isSubmit) $('#loginForm').submit();
+
+			});
+		});
+		</script>
+	</th:block>	
+
+	<th:block layout:fragment="customContents">
+    <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            <div class="checkout__form">
+                <h4>로그인</h4>
+                <form id="loginForm" th:action="@{/userMember/login}" method="post">
+                    <div class="row">
+                        <div class="offset-lg-3 col-lg-9 col-md-9">
+                            <div class="row">
+                            	<div class="col-md-2">
+                            		<label>아이디<span>*</span></label>
+                            	</div>
+                                <div class="col-md-6">
+                                    <div class="checkout__input">
+                                        <input type="text" id="memberId" name="memberId">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+								<div class="col-md-2">
+									<label>비밀번호<span>*</span></label>
+								</div>
+								<div class="col-md-6">
+									<div class="checkout__input">
+										<input type="password" id="memberPw" name="memberPw">
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="offset-md-3 md-6 offset-md-3" style="text-align: center;">
+									<a th:href="@{/userMember/beforeAddMember}"><button type="button" class="btn btn-success mr-3 btn-lg">회원가입</button></a>
+									<button type="button" class="btn btn-info ml-3 btn-lg" id="loginBtn">로그인</button>
+								</div>
+							</div>
+							<div class="row">
+								<div th:if="${not #strings.isEmpty(result)}">
+									<p th:text="${result}"></p>
+								</div>
+							</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+	</th:block>
+</html>

@@ -11,6 +11,12 @@ import com.kfarmstar.dto.AdPrice;
 public interface AdMapper {
 
 
+	// 광고 신청 등록
+	public int addAdApply(AdApply adApply);
+	
+	// 광고 진행 중 or 광고 완료 목록
+	public List<AdApply> getAdvertisingList();
+	
 	// 광고 신청 목록
 	public List<AdApply> getAdApplyList();
 	
@@ -31,5 +37,11 @@ public interface AdMapper {
 	
 	// 광고 단가 등록
 	public int addAdPrice(AdPrice adPrice);
+	
+	// 광고 승인 
+	public int adApproveUpdate(AdApply adApply);
+
+	// 광고 승인 취소
+	public int adApproveCancle(AdApply adApply);
 
 }

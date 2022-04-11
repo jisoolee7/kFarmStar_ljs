@@ -58,7 +58,9 @@
 		<script>
 	
 			$(function(){
-				
+				  var sessionLevel = '[[${session.SLEVEL}]]';
+				  
+				  
 				// 대분류와 소분류 연결
 				$("#goodsLargeCate").on('change', function(e) {
                     var goodsLargeCate = $('select[name="goodsLargeCate"]').val();
@@ -73,7 +75,7 @@
                             success : function(data) {
                                 console.log(data);
                                 console.log(data.length);
-                                var txt1='<option value="none"> :: 소 분 류 선 택 :: </option>';
+                                var txt1='<option value=""> :: 소 분 류 선 택 :: </option>';
                                     for(var i =0;i<data.length;i++)
                                     {
                                         txt1 +='<option value="'+data[i].goodsSmallCate+'"'    +'>' + data[i].goodsSmallName  +'</option>';
@@ -85,49 +87,83 @@
                         });
        			 });
 				
-				
-				
+			  
 				
 				/* 	유효성 검사 수정 필요! */
-				/* function validationCheck(data){
+				function validationCheck(data){
 					if(typeof data == 'undefined' || data == '' || data == null){
 						return false;
 					}
 					return true;
-				} */
+				} 
+				
 				
 				$('#addGoodsBtn').click(function(){
+					
+					/* 판매자만 상품을 등록할 수 있게 처리 */
+					
+					if(sessionLevel != '판매자'){
+						alert('판매자만 상품등록이 가능합니다')
+						return false;
+					}
+				
+					
 					var isSubmit = true;
 					var inputObj = $('#addGoodsForm').find('input');
-					/* var inputObj2 = $('#addGoodsForm').find('textarea'); */
 					
-					/* $.each(inputObj, function(){
+					 $.each(inputObj, function(){
 						var inputData = $(this).val();
 						var result = validationCheck(inputData);
 						
 						// 사용자가 입력하지 않은 경우
 						if(!result){
-							alert('필수 항목입니다. 입력해주세요');
+							alert('필수 항목입니다. 입력해주세요.');
 							$(this).focus();
 							isSubmit = false;
 							return false;
 						}
 						
-					}); */
+					});
+					 
 					
+					if(isSubmit){
+						if($("#goodsPostExplain").val() == ""){
+						    alert("상품 설명을 입력해주세요.");
+						    $("#goodsPostExplain").focus();
+						    isSubmit = false;
+						    return false;
+						}
+					}
+					if(isSubmit){
+						if($("#goodsLargeCate").val() == ""){
+						    alert("대분류 카테고리를 선택해주세요.");
+						    $("#goodsLargeCate").focus();
+						    isSubmit = false;
+						    return false;
+						}
+					}
+						
+					if(isSubmit){
+						if($("#goodsSmallCate").val() == ""){
+						    alert("소분류 카테고리를 선택해주세요.");
+						    $("#goodsSmallCate").focus();
+						    isSubmit = false;
+						    return false;
+						}
+					}	 
 					
-						/* 
-						if($("input:radio[name=refurbOrganic]:checked").length < 1){
+					if(isSubmit){	
+						if($("input:radio[name=goodsRefurbOrganic]:checked").length < 1){
 						    alert('유기농 여부를 선택해주세요.');
 						    isSubmit = false;
 						    return false;
 						}
-						 */
-						
-						 
-						 
-						 
+					}
+
+				
+
 					if(isSubmit) $('#addGoodsForm').submit();
+					
 				});
 			});
 				
@@ -151,7 +187,7 @@
 				<div class="x_content">
 					<br />
 									<!-- th:action="@{/goods/addGoods}" method="post" -->
-					<form class="form-horizontal form-label-left" id="addGoodsForm" th:action="@{/goods/addGoods}" method="post">
+					<form class="form-horizontal form-label-left" id="addGoodsForm" th:action="@{/goods/addGoods}" method="post" enctype="multipart/form-data">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -161,8 +197,47 @@
 							</thead>
 							<tbody>
 								<tr>
+									<th scope="col">판매자 정보</th>
+									<td scope="col">
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="memberId">아이디</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" id="memberId" name="memberId" th:value="${session.SID}" readonly="readonly">
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
 									<th scope="row">상품 정보</th>
 									<td>
+									
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsLargeCate">대분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsLargeCate" name="goodsLargeCate">
+													<option value="">:: 대 분 류 선 택 ::</option>
+													<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
+													<option th:value="${l.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
+													</th:block>
+												</select>
+											</div>
+										</div>
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsSmallCate">소분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsSmallCate" name="goodsSmallCate">
+													<option value="">:: 소 분 류 선 택 ::</option>
+												</select>
+											</div>
+										</div>
+									
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label" for="goodsRefurbName">상품명</label>
@@ -199,6 +274,24 @@
 										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsWeight">상품 중량</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" id="goodsWeight" name="goodsWeight">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsDeliveryCharge">배송비</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="number" class="form-control" id="goodsDeliveryCharge" name="goodsDeliveryCharge">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
 												<label class="control-label" for="goodsRefurbHarvestDate">상품 수확일</label>
 											</div>
 											<div class="col-md-8 col-sm-8">
@@ -208,37 +301,22 @@
 	
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsPostExplain">상품 설명</label>
+												<label class="control-label" for="goodsPostSummary">상품 요약 설명</label>
+											</div>
+											<div class="col-md-8 col-sm-8">
+												<input type="text" class="form-control" id="goodsPostSummary" name="goodsPostSummary">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsPostExplain">상품 상세 설명</label>
 											</div>
 											<div class="col-md-8 col-sm-8">
 												<textarea class="form-control" rows="3" id="goodsPostExplain" name="goodsPostExplain"></textarea>
 											</div>
 										</div>
 	
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsLargeCate">대분류</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<select class="form-control" id="goodsLargeCate" name="goodsLargeCate">
-													<option>:: 대 분 류 선 택 ::</option>
-													<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
-													<option th:value="${l.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
-													</th:block>
-												</select>
-											</div>
-										</div>
-	
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsSmallCate">소분류</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<select class="form-control" id="goodsSmallCate" name="goodsSmallCate">
-													<option>:: 소 분 류 선 택 ::</option>
-												</select>
-											</div>
-										</div>
 										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
@@ -266,12 +344,10 @@
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label">상품 사진</label>
 											</div>
-											<div class="col-md-3 col-sm-3">
-												<img th:src="@{/img/exOrange.jpg}" class="img-fluid" alt="Responsive image">
+											<div class="col-md-3 col-sm-9">
+												<input type="file" name="fileImage" multiple="multiple" />
 											</div>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="file">
-											</div>
+											
 										</div>
 									</td>
 								</tr>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<!-- 상품 카테고리 검색 바 -->
+	<div th:fragment="searchApplyListFragment">
+		<form th:action="@{/advertisement/adApplyList}" method="get">	
+				
+			<!-- start : 기간 검색 바  (수정 필요)-->
+							
+			<div class="form-row pb-3">
+				<div class="col-md-3 col-sm-3 ">
+					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
+						type="date" required="required" onfocus="this.type='date'"
+						onmouseover="this.type='date'" onclick="this.type='date'"
+						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+					<script>
+						function timeFunctionLong(input) {
+							setTimeout(function() {
+								input.type = 'text';
+							}, 60000);
+						}
+					</script>
+				</div>
+				<div class="align-self-center">
+					<i class="fa fa-minus"></i>
+				</div>
+				
+				<div class="col-md-3 col-sm-3 ">
+					<input class="date-picker form-control" placeholder="dd-mm-yyyy"
+						type="date" required="required" onfocus="this.type='date'"
+						onmouseover="this.type='date'" onclick="this.type='date'"
+						onblur="this.type='text'" onmouseout="timeFunctionLong(this)">
+					<script>
+						function timeFunctionLong(input) {
+							setTimeout(function() {
+								input.type = 'text';
+							}, 60000);
+						}
+					</script>
+				</div>
+						
+			</div>
+			
+			<!-- END : 기간 검색 바 -->
+
+
+			<!-- start : 검색 바 -->
+			 <div class="form-row">
+			    <div class="form-group col-md-2">
+			      <select id=" " class="form-control">
+			        <option selected> :: 선택 :: </option>
+			        <option>옵션 1</option>
+			        <option>옵션 2</option>
+			        <option>옵션 3</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <input type="text" class="form-control" name="searchValue" placeholder="Search"
+					aria-label="Text input with dropdown button">
+				</div>
+			    <div class="form-group col-md-2">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="submit">검색</button>
+					</div>
+				</div>
+			  </div>
+			  
+			  <!-- 
+			  <div class="form-group col-md-6">
+			      <label for="inputCity">City</label>
+			      <input type="text" class="form-control" id="inputCity">
+			    </div>
+			    <div class="form-group col-md-4">
+			      <label for="inputState">State</label>
+			      <select id="inputState" class="form-control">
+			        <option selected>Choose...</option>
+			        <option>...</option>
+			      </select>
+			    </div>
+			    <div class="form-group col-md-2">
+			      <label for="inputZip">Zip</label>
+			      <input type="text" class="form-control" id="inputZip">
+			    </div>
+			   -->
+
+			<!-- END : 검색 바 -->
+		</form>
+
+	
+	</div>
+	
+	<!-- 선생님 예시
+	<div th:fragment="searchGoodsFragment">
+		<form th:action="@{/goods/goodsList}" method="get">
+			<select	name="searchKey">
+				<option value="goodsName">상품명</option>
+				<option th:if="${session.SLEVEL == '1'}" value="goodsSellerId">판매자</option>
+			</select>
+			<input type="text" name="searchValue" placeholder="검색 키워드를 입력해주세요."/>
+			<button type="submit">검색</button>
+		</form>
+	</div>
+	 -->
+
+</html>

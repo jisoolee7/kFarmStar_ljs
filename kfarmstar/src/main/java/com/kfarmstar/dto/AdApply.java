@@ -22,18 +22,16 @@ public class AdApply {
 	
 	private AdPrice adPrice;
 	private Member member;
-	
-	
 	public String getAdApplyCode() {
 		return adApplyCode;
 	}
 	public void setAdApplyCode(String adApplyCode) {
 		this.adApplyCode = adApplyCode;
 	}
-	public String getadPriceCode() {
+	public String getAdPriceCode() {
 		return adPriceCode;
 	}
-	public void setadPriceCode(String adPriceCode) {
+	public void setAdPriceCode(String adPriceCode) {
 		this.adPriceCode = adPriceCode;
 	}
 	public String getMemberId() {
@@ -174,5 +172,6 @@ public class AdApply {
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 }

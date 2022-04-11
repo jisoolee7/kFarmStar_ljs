@@ -94,6 +94,8 @@
 					$('select').attr("disabled",false);
 					$('textarea').attr("readonly",false);
 					$('#goodsRefurbCode').attr("readonly",true);
+					$('#saveButton').removeAttr( "hidden" );
+					$(this).attr("hidden",true);
 				});
 			
 			});
@@ -116,7 +118,7 @@
 				</div>
 				<div class="x_content">
 					<br />
-					<form class="form-horizontal form-label-left">
+					<form class="form-horizontal form-label-left" th:action="@{/goods/modifyGoods}" method="post">
 						<table class="table table-bordered">
 							<thead>
 								<tr>
@@ -165,6 +167,35 @@
 									<td>
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsLargeCate">대분류 명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsLargeCate" name="goodsLargeCate" disabled="disabled">
+													<option>:: 대 분 류 선 택 ::</option>
+													<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
+													<option th:value="${l.goodsLargeCate}" th:selected="${l.goodsLargeCate==goods.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
+													</th:block>
+												</select>
+												
+											</div>
+										</div>
+	
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsSmallCate">소분류</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<select class="form-control" id="goodsSmallCate" name="goodsSmallCate" disabled="disabled">
+													<option>:: 소 분 류 선 택 ::</option>
+													<th:block th:if="${not #lists.isEmpty(goodsSmallList)}" th:each="s : ${goodsSmallList}">
+													<option th:value="${s.goodsSmallCate}" th:selected="${s.goodsSmallCate==goods.goodsSmallCate}">[[${s.goodsSmallName}]]</option>
+													</th:block>
+												</select>
+											</div>
+										</div>
+									
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
 												<label class="control-label" for="goodsRefurbName">상품명</label>
 											</div>
 											<div class="col-md-8 col-sm-8 ">
@@ -172,6 +203,7 @@
 												 name="goodsRefurbName" th:value="${goods.goodsRefurbName}">
 											</div>
 										</div>
+										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
 												<label class="control-label" for="goodsRefurbPrice">판매 가격</label>
@@ -203,6 +235,26 @@
 										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsWeight">상품 중량</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" readonly="readonly"
+												 name="goodsWeight" th:value="${goods.goodsWeight}">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsDeliveryCharge">배송비</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" readonly="readonly"
+												 name="goodsDeliveryCharge" th:value="${goods.goodsDeliveryCharge}">
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
 												<label class="control-label" for="goodsRefurbHarvestDate">상품 수확일</label>
 											</div>
 											<div class="col-md-8 col-sm-8">
@@ -210,10 +262,20 @@
 												 name="goodsRefurbHarvestDate" th:value="${goods.goodsRefurbHarvestDate}">
 											</div>
 										</div>
+										
+										<div class="form-group row">
+											<div class="col-md-2 col-sm-2">
+												<label class="control-label" for="goodsPostSummary">상품 요약 설명</label>
+											</div>
+											<div class="col-md-8 col-sm-8 ">
+												<input type="text" class="form-control" readonly="readonly"
+												 name="goodsPostSummary" th:value="${goods.goodsPostSummary}">
+											</div>
+										</div>
 	
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsPostExplain">상품 설명</label>
+												<label class="control-label" for="goodsPostExplain">상품 상세 설명</label>
 											</div>
 											<div class="col-md-8 col-sm-8 ">
 												<textarea class="form-control" rows="3" readonly="readonly"
@@ -221,44 +283,17 @@
 											</div>
 										</div>
 	
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsLargeCate">대분류 명</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<select class="form-control" id="goodsLargeCate" name="goodsLargeCate" disabled="disabled">
-													<option>:: 대 분 류 선 택 ::</option>
-													<th:block th:if="${not #lists.isEmpty(largeCateList)}" th:each="l : ${largeCateList}">
-													<option th:value="${l.goodsLargeCate}" th:selected="${l.goodsLargeCate==goods.goodsLargeCate}">[[${l.goodsLarge.goodsLargeName}]]</option>
-													</th:block>
-												</select>
-												
-											</div>
-										</div>
-	
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label" for="goodsSmallCate">소분류</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<select class="form-control" id="goodsSmallCate" name="goodsSmallCate" disabled="disabled">
-													<option>:: 소 분 류 선 택 ::</option>
-													<th:block th:if="${not #lists.isEmpty(goodsSmallList)}" th:each="s : ${goodsSmallList}">
-													<option th:value="${s.goodsSmallCate}" th:selected="${s.goodsSmallCate==goods.goodsSmallCate}">[[${s.goodsSmallName}]]</option>
-													</th:block>
-												</select>
-											</div>
-										</div>
+										
 										
 										<div class="form-group row">
 											<div class="col-md-2 col-sm-2">
-												<label class="control-label">유기농 여부</label>
+												<label class="control-label" for="goodsRefurbOrganic">유기농 여부</label>
 											</div>
-											<div class="col-md-10 col-sm-10 align-self-center">
+											<div class="col-md-10 col-sm-10 align-self-center" id="goodsRefurbOrganic">
 												<div class="radio form-check form-check-inline">
 													<label class="form-check-label" for="organic">
 													<th:block th:if="${not #lists.isEmpty(goods)}" th:each="g : ${goods}">
-														<input type="radio" class="flat" name="refurbOrganic" id="organic" value="1"
+														<input type="radio" class="flat" name="goodsRefurbOrganic" id="organic" value="1"
 															th:checked="${(g.goodsRefurbOrganic == '1')}" disabled="disabled"> 유기농 O
 													</th:block>
 													</label>
@@ -266,13 +301,14 @@
 												<div class="radio form-check form-check-inline">
 													<label class="form-check-label" for="nonOrganic"> 
 													<th:block th:if="${not #lists.isEmpty(goods)}" th:each="g : ${goods}">
-														<input type="radio" class="flat" name="refurbOrganic" id="nonOrganic" value="0"
+														<input type="radio" class="flat" name="goodsRefurbOrganic" id="nonOrganic" value="0"
 														 th:checked="${(g.goodsRefurbOrganic == '0')}" disabled="disabled"> 유기농 X
 													</th:block>
 													</label>
 												</div>
 											</div>
 										</div>
+										
 									</td>
 								</tr>
 								<tr>
@@ -289,29 +325,13 @@
 												<input type="file" disabled="disabled" multiple="multiple">
 											</div>
 										</div>
+										<div class="form-group row">
+											<th:block th:if="${not #lists.isEmpty(goods.fileList)}" th:each="l : ${goods.fileList}">
+												<img th:src="@{${ '/' + #strings.replace(l.filePath, '\', '/')}}" class="img-fluid"/> 
+											</th:block>
+										</div>
 									</td>
 								</tr>
-					<!-- 			<tr>
-									<th scope="row">판매자 정보</th>
-									<td>
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label">판매자 이름</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<input type="text" class="form-control">
-											</div>
-										</div>
-										<div class="form-group row">
-											<div class="col-md-2 col-sm-2">
-												<label class="control-label">사업장 번호</label>
-											</div>
-											<div class="col-md-8 col-sm-8 ">
-												<input type="text" class="form-control">
-											</div>
-										</div>
-									</td>
-								</tr>							 -->
 							</tbody>
 						</table>
 						<div class="ln_solid"></div>
@@ -320,7 +340,7 @@
 								<a th:href="@{/goods/goodsList}"><button type="button" class="btn btn-primary">취소</button></a>
 								<button type="button" class="btn btn-danger">삭제</button>
 								<button type="button" class="btn btn-success" id="modifyButton">수정</button>
-								<button type="submit" class="btn btn-info">저장</button>
+								<button type="submit" class="btn btn-info" id="saveButton" hidden="hidden">저장</button>
 							</div>
 						</div>
 	

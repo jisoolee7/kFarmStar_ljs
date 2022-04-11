@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<!-- start:Left Menu -->
 	<div th:fragment="headermenuFragment">
 	
@@ -11,7 +12,7 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>상품 카테고리</span>
                         </div>
                         <ul>
                             <li><a href="@{#}">Fresh Meat</a></li>
@@ -33,22 +34,23 @@
                         <div class="hero__search__form">
                             <form action="#">
                                 <div class="hero__search__categories">
-                                    All Categories
+                                    	전체 카테고리
                                     <span class="arrow_carrot-down"></span>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                <input type="text" placeholder="상품명을 검색하세요">
+                                <button type="submit" class="site-btn">검색</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
-                            </div>
-                        </div>
+							<div class="hero__search__phone__icon">
+								<i class="fa fa-phone"></i>
+							</div>
+							<div class="hero__search__phone__text">
+								<h5>063-717-1008</h5>
+								<span>09:00 ~ 18:00</span>
+							</div>
+						</div>
+                        <th:block layout:fragment="mainBanner"></th:block>
                     </div>
                 </div>
             </div>
